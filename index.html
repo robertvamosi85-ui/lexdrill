@@ -66,8 +66,8 @@ body{
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
-  padding:0 16px;
-  height:52px;
+  padding:env(safe-area-inset-top) 16px 0;
+  height:calc(52px + env(safe-area-inset-top));
   display:flex;align-items:center;gap:10px;
   flex-shrink:0;
 }

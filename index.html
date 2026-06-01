@@ -397,7 +397,7 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
   border:1px solid var(--border2);border-radius:var(--rl);
   overflow:hidden;width:100%;
 }
-.ref-inner{max-height:calc(100vh - 280px);overflow-y:auto}
+.ref-inner{max-height:calc(100vh - 280px);overflow-y:auto;overflow-x:hidden}
 .ref-table{width:100%;border-collapse:collapse;font-size:13px}
 .ref-table th{
   padding:9px 12px;text-align:left;
@@ -412,8 +412,8 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
 }
 .ref-table tr:last-child td{border-bottom:none}
 .ref-table tr:hover td{background:var(--bg3)}
-.ref-table .en-cell{font-weight:700;color:var(--text)}
-.ref-table .hu-cell{color:var(--text2);font-weight:600}
+.ref-table .en-cell{font-weight:700;color:var(--text);word-break:break-word;white-space:normal}
+.ref-table .hu-cell{color:var(--text2);font-weight:600;word-break:break-word;white-space:normal}
 .dp-sm{
   display:inline-block;padding:2px 7px;border-radius:8px;
   font-size:10px;font-weight:800;white-space:nowrap;
@@ -889,9 +889,9 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
     <div class="sh-sub">Jogalkalmazás-fókuszú referencia · SaaS & M&A</div>
   </div>
   <div class="sub-tabs">
-    <button class="sub-tab active" onclick="aiactTab('overview',this)">Áttekintés</button>
-    <button class="sub-tab" onclick="aiactTab('modules',this)">Modulok</button>
-    <button class="sub-tab" onclick="aiactTab('timeline',this)">Idősor</button>
+    <button class="sub-tab active" onclick="aiactTab('overview',this)">Overview</button>
+    <button class="sub-tab" onclick="aiactTab('modules',this)">Modules</button>
+    <button class="sub-tab" onclick="aiactTab('timeline',this)">Timeline</button>
   </div>
 
   <!-- OVERVIEW -->
@@ -912,8 +912,8 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
   <!-- TIMELINE -->
   <div id="aiat-timeline" class="aiact-tab" style="width:100%">
     <div class="card">
-      <div class="card-title">Compliance idősor</div>
-      <div class="card-sub" style="margin-bottom:14px">Fontos határidők és "Te itt vagy" jelölés</div>
+      <div class="card-title">Compliance Timeline</div>
+      <div class="card-sub" style="margin-bottom:14px">Key deadlines and "you are here" marker</div>
       <div class="tl-wrap" id="tl-container"></div>
     </div>
   </div>
@@ -1009,7 +1009,7 @@ const AIACT_DATA = {
       <b>5 fő kötelezettség:</b> QMS · Műszaki dok. · Emberi felügyelet · Conformity assessment · EU-regisztráció`
     },
     {
-      color:"#a78bfa",title:"🧠 GPAI modellek — V. fejezet",
+      color:"#a78bfa",title:"🧠 GPAI Models — Title V",
       meta:"GPT-4 · Claude · Gemini · határidő: 2026.08.02",
       detail:`<b>Ha API-t használsz (downstream):</b><br>
       — Te downstream szolgáltató vagy, nem GPAI provider<br>
@@ -1681,7 +1681,7 @@ function renderLearnHome() {
   let html = `
     <div class="section-header">
       <div class="sh-label">AI Act Tanfolyam</div>
-      <div class="sh-title">📚 10 Lecke</div>
+      <div class="sh-title">📚 10 Lessons</div>
       <div class="sh-sub">Deployer-fókuszú · SaaS & M&A · Magyar jogi kontextus</div>
     </div>
     <div class="learn-progress">
@@ -1704,7 +1704,7 @@ function renderLearnHome() {
            onclick="${locked?'':('openLesson('+l.id+')')}">
         <div class="lesson-icon ${iconClass}">${icon}</div>
         <div style="flex:1">
-          <div class="lesson-num">Lecke ${l.id} · ${l.time}</div>
+          <div class="lesson-num">Lesson ${l.id} · ${l.time}</div>
           <div class="lesson-name">${l.title}</div>
         </div>
         <div class="lesson-badge">${badge}</div>
@@ -1777,7 +1777,7 @@ function renderLessonView(lesson, chunkIdx) {
           <div class="story-lbl">⚠️ Mi a tét</div>
           <div class="story-txt">${chunk.consequences}</div>
         </div>
-        ${!done ? `<button class="read-btn" onclick="markRead(${lesson.id},${ci},this)" id="readbtn-${lesson.id}-${ci}">Megértettem →</button>` : '<button class="read-btn read-done">✓ Elolvasva</button>'}
+        ${!done ? `<button class="read-btn" onclick="markRead(${lesson.id},${ci},this)" id="readbtn-${lesson.id}-${ci}">Got it →</button>` : '<button class="read-btn read-done">✓ Read</button>'}
       </div>`;
 
       // Exercise
@@ -1786,7 +1786,7 @@ function renderLessonView(lesson, chunkIdx) {
       chunksHtml += `<div class="ex-wrap" id="ex-${lesson.id}-${ci}">
         <div class="ex-label">📝 Gyakorlat</div>`;
       if(locked_ex) {
-        chunksHtml += '<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0">Olvasd el a leckét a feladat feloldásához</div>';
+        chunksHtml += '<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0">Read the lesson to unlock the exercise</div>';
       } else {
         chunksHtml += `<div class="ex-q">${chunk.question}</div>`;
         chunk.choices.forEach((ch,chi) => {
@@ -1838,10 +1838,10 @@ function renderLessonView(lesson, chunkIdx) {
     const nextLesson = LESSONS.find(l=>l.id===lesson.id+1);
     completeHtml = `<div class="lesson-complete">
       <span class="lc-icon">🎉</span>
-      <div class="lc-title">Lecke kész!</div>
+      <div class="lc-title">Lesson complete!</div>
       <div class="lc-sub">${lesson.title}</div>
-      ${nextLesson?`<button class="lc-btn" onclick="openLesson(${nextLesson.id})">Következő lecke →</button>`:''}
-      <button class="lc-home" onclick="renderLearnHome()">← Vissza a listához</button>
+      ${nextLesson?`<button class="lc-btn" onclick="openLesson(${nextLesson.id})">Next lesson →</button>`:''}
+      <button class="lc-home" onclick="renderLearnHome()">← Back to lessons</button>
     </div>`;
   }
 
@@ -1850,7 +1850,7 @@ function renderLessonView(lesson, chunkIdx) {
       <button class="lv-back" onclick="renderLearnHome()">←</button>
       <div>
         <div class="lv-title">${lesson.title}</div>
-        <div class="lv-meta">Lecke ${lesson.id} · ${lesson.time}</div>
+        <div class="lv-meta">Lesson ${lesson.id} · ${lesson.time}</div>
       </div>
     </div>
     <div class="chunk-prog">${chunkDots}</div>

@@ -889,9 +889,9 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
     <div class="sh-sub">Jogalkalmazás-fókuszú referencia · SaaS & M&A</div>
   </div>
   <div class="sub-tabs">
-    <button class="sub-tab active" onclick="aiactTab('overview',this)">Overview</button>
-    <button class="sub-tab" onclick="aiactTab('modules',this)">Modules</button>
-    <button class="sub-tab" onclick="aiactTab('timeline',this)">Timeline</button>
+    <button class="sub-tab active" onclick="aiactTab('overview',this)">Áttekintés</button>
+    <button class="sub-tab" onclick="aiactTab('modules',this)">Modulok</button>
+    <button class="sub-tab" onclick="aiactTab('timeline',this)">Idősor</button>
   </div>
 
   <!-- OVERVIEW -->
@@ -912,8 +912,8 @@ kbd{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padd
   <!-- TIMELINE -->
   <div id="aiat-timeline" class="aiact-tab" style="width:100%">
     <div class="card">
-      <div class="card-title">Compliance Timeline</div>
-      <div class="card-sub" style="margin-bottom:14px">Key deadlines and "you are here" marker</div>
+      <div class="card-title">Compliance idősor</div>
+      <div class="card-sub" style="margin-bottom:14px">Fontos határidők és "Te itt vagy" jelölés</div>
       <div class="tl-wrap" id="tl-container"></div>
     </div>
   </div>
@@ -984,321 +984,323 @@ const ALL_VOCAB = [...VOCAB, ...AIACT_VOCAB];
 
 
 // ─────────────────────────────────────────────────────
-// SECTION 2 — AI ACT REFERENCE DATA
-// To update: edit arrays below. No HTML/JS changes needed.
+// SECTION 2 — AI ACT REFERENCE DATA (ENGLISH)
 // ─────────────────────────────────────────────────────
 const AIACT_DATA = {
   riskTiers: [
     {
-      color:"#f87171",title:"🚫 Tiltott — Art. 5",
-      meta:"8 tiltott gyakorlat · 2025.02.02 óta hatályos",
-      detail:`<b>SaaS-ra releváns 3:</b><br>
-      1. Szublimális / manipulatív technikák — dark pattern + AI kombó szürkezóna<br>
-      2. Érzelemfelismerés munkahelyen / oktatásban — webcam mood detection tiltott<br>
-      3. Social scoring — felhasználói viselkedés alapú összefüggéstelen döntések<br><br>
-      <b>Szankció:</b> €35M vagy a forgalom 7%-a — melyik magasabb<br>
-      <b>Nincs átmeneti idő:</b> 2025.02.02 óta azonnal alkalmazandó`
+      color:"#f87171",title:"🚫 Prohibited — Art. 5",
+      meta:"8 banned AI practices · In force since 2 Feb 2025",
+      detail:`<b>What is this about?</b> Art. 5 lists eight AI uses that are simply banned — no conformity assessment, no sandbox escape, no transitional period. If your client's product falls into any of these categories, it must stop immediately. The EU decided these specific uses are incompatible with fundamental rights regardless of their technical quality or commercial value.<br><br>
+      <b>The 3 most relevant for SaaS:</b><br><br>
+      <b>1. Subliminal manipulation (Art. 5(1)(a)):</b> AI that exploits unconscious psychological mechanisms to distort a person's behaviour in a way that causes harm. This is the grey zone: dark patterns combined with AI, aggressive personalisation engines, persuasion optimisation tools. The key test is whether the AI bypasses the user's conscious decision-making AND causes or is likely to cause harm. Neither element alone triggers the ban — both must be present.<br><br>
+      <b>2. Emotion recognition at work (Art. 5(1)(f)):</b> Any AI that infers or detects emotions of natural persons in workplace or educational settings is prohibited outright. Webcam mood detection, employee sentiment monitoring, productivity scoring from facial expressions — all banned. The only exceptions are AI used for medical or safety reasons (e.g. detecting driver fatigue).<br><br>
+      <b>3. Social scoring (Art. 5(1)(c)):</b> AI that evaluates or classifies people based on their social behaviour or personal characteristics, where the scoring leads to detrimental treatment in an unrelated context. Example: using a user's engagement score to determine their eligibility for a discount in a completely different product category.<br><br>
+      <b>Penalty:</b> €35M or 7% of global annual turnover — whichever is higher. This is the top tier, above even GDPR.<br>
+      <b>No grace period:</b> Applies from 2 February 2025. Ongoing violations must stop now.`
     },
     {
-      color:"#fbbf24",title:"⚠️ Nagy kockázat — Art. 6 + III. Melléklet",
-      meta:"8 szektor · compliance határidő: 2027.12.02",
-      detail:`<b>Mikor vonatkozik SaaS-ra?</b><br>
-      Foglalkoztatás (ATS, HR értékelés) · Hitelelbírálás · Oktatás · Egészségügy<br><br>
-      <b>Art. 6(3) kivétel:</b> ha csak előkészítő feladatot végez ÉS nem profil alapú → nem nagy kockázat<br>
-      <b>DE:</b> profilalkotás MINDIG nagy kockázatú — nincs kivétel<br><br>
-      <b>5 fő kötelezettség:</b> QMS · Műszaki dok. · Emberi felügyelet · Conformity assessment · EU-regisztráció`
+      color:"#fbbf24",title:"⚠️ High-Risk — Art. 6 + Annex III",
+      meta:"8 sectors · Compliance deadline: 2 Dec 2027",
+      detail:`<b>What makes an AI system "high-risk"?</b> The Act doesn't define it by the technology used — it defines it by the context in which the AI makes or influences consequential decisions about people. Annex III lists eight sectors. If your client's system operates in any of these sectors and makes or influences decisions about specific individuals, it is presumed high-risk.<br><br>
+      <b>The 8 Annex III sectors:</b> (1) Biometrics — identification, categorisation, emotion detection; (2) Critical infrastructure — water, gas, electricity, transport; (3) Education and vocational training — access, evaluation, assessment; (4) Employment and worker management — recruitment, CV sorting, performance evaluation, promotion, dismissal; (5) Access to essential private services — credit scoring, insurance risk assessment; (6) Law enforcement — risk assessment of individuals, evidence evaluation; (7) Migration and border control — risk assessment, document verification; (8) Justice and democratic processes — AI assisting courts or elections.<br><br>
+      <b>The Art. 6(3) narrow escape:</b> Even if your system is in one of these sectors, it is NOT high-risk if: (a) it only performs a narrow preparatory task (e.g. document formatting), AND (b) its output does not meaningfully influence the actual decision about a person. But: if the system profiles individuals in any way, there is no escape — profiling is always high-risk within Annex III, no exceptions.<br><br>
+      <b>The 5 core obligations for high-risk providers:</b><br>
+      (1) Quality Management System (Art. 17) — written, covering the full product lifecycle, proportionate for SMEs<br>
+      (2) Technical documentation (Art. 11 + Annex IV) — 9 mandatory elements, must exist before market launch, retained 10 years<br>
+      (3) Human oversight (Art. 14) — a real person must be able to monitor, override, and stop the system<br>
+      (4) Conformity assessment (Art. 43) — self-assessment for most Annex III systems; third-party notified body for biometrics and law enforcement<br>
+      (5) EU database registration + CE marking (Art. 49) — registered before launch; CE mark can be applied digitally on software`
     },
     {
-      color:"#a78bfa",title:"🧠 GPAI Models — Title V",
-      meta:"GPT-4 · Claude · Gemini · határidő: 2026.08.02",
-      detail:`<b>Ha API-t használsz (downstream):</b><br>
-      — Te downstream szolgáltató vagy, nem GPAI provider<br>
-      — Art. 25(2): jogod van dokumentációt kérni a providertől<br>
-      — A nagy kockázatú rendszered saját conformity assessment-je a te feladatod<br><br>
-      <b>SRMI küszöb:</b> ≥10²⁵ FLOP betanítás → extra kötelezettségek (adversarial testing, incidens jelntés)`
+      color:"#a78bfa",title:"🧠 GPAI Models — Title VIII",
+      meta:"GPT-4 · Claude · Gemini · Deadline: 2 Aug 2026",
+      detail:`<b>What is a GPAI model?</b> A General Purpose AI model is a large-scale model trained on vast amounts of data that can perform a wide range of tasks — text generation, image analysis, code writing, reasoning. GPT-4, Claude, Gemini, Mistral, Llama are all GPAI models. They are regulated separately under Title VIII, supervised by the EU AI Office (not national authorities), with a compliance deadline of 2 August 2026.<br><br>
+      <b>If you use a GPAI API (the typical SaaS situation):</b> You are a "downstream provider" — the company that takes the GPAI model and builds a specific-purpose product on top of it. OpenAI is the GPAI provider; you are the AI system provider. These are separate legal roles with separate obligations. OpenAI's GPAI compliance does NOT cover your system's high-risk compliance obligations.<br><br>
+      <b>Art. 25(2) — your documentation right:</b> If you are building a high-risk AI system on top of a GPAI model, you have the right to request the Annex XII technical documentation from the GPAI provider. Without this, you cannot complete your own conformity assessment. This right exists in the regulation, but it is NOT automatically in standard API terms — you need to negotiate it into your vendor agreement.<br><br>
+      <b>SRMI — Systemic Risk Models:</b> Models trained with ≥10²⁵ FLOP computational capacity face additional obligations: adversarial testing (red-teaming), reporting serious incidents to the AI Office, cybersecurity measures, and energy consumption reporting. GPT-4 and similar frontier models are presumed to be SRMI.<br><br>
+      <b>Open-source GPAI (Llama, Mistral open weights):</b> Reduced obligations — no Annex XII documentation required if weights and parameters are publicly available under an open licence. However, documentation of training data and copyright compliance is still required, and the SRMI rules apply regardless of open-source status.`
     },
     {
-      color:"#60a5fa",title:"ℹ️ Korlátozott kockázat — Art. 50",
-      meta:"Tájékoztatási kötelezettség — deployer feladata",
-      detail:`<b>Chatbot:</b> közölni kell hogy AI-jal kommunikál a felhasználó — kivéve ha nyilvánvaló<br>
-      <b>Deepfake / szintetikus tartalom:</b> géppel olvasható jelöléssel kell ellátni<br>
-      <b>Érzelemfelismerés:</b> tájékoztatni kell az érintetteket<br><br>
-      <b>Fontos:</b> Art. 50 akkor is alkalmazandó, ha az AI egyébként minimális kockázatú`
+      color:"#60a5fa",title:"ℹ️ Limited Risk — Art. 50",
+      meta:"Transparency obligations · Deployer's responsibility",
+      detail:`<b>What is limited risk?</b> These are AI systems that don't make high-stakes decisions but interact with or affect people in ways where transparency matters. The regulation doesn't impose the full high-risk compliance stack — it just requires specific disclosures.<br><br>
+      <b>Three specific Art. 50 obligations:</b><br><br>
+      <b>1. Chatbot disclosure:</b> If your product uses an AI system that interacts with natural persons (e.g. a customer service chatbot, an AI legal assistant, a virtual onboarding agent), you must inform users that they are interacting with AI — clearly and at the start of the interaction. The only exception is when it is objectively obvious from context (e.g. a clearly branded "AI assistant" button).<br><br>
+      <b>2. Deepfake and synthetic content marking:</b> AI-generated audio, video, images, or text that represents real people or events must carry a machine-readable marking identifying it as AI-generated. This applies to marketing content, video testimonials, AI-voiced demos.<br><br>
+      <b>3. Emotion recognition disclosure:</b> If your system detects or infers user emotions (in contexts where it is not prohibited — i.e. outside workplace and education), you must disclose this to affected persons.<br><br>
+      <b>Critical point:</b> Art. 50 applies independently of the risk tier. A system that is otherwise minimal-risk still triggers Art. 50 obligations if it involves chatbot interaction or synthetic content. The deployer (your client using the SaaS product) is primarily responsible for Art. 50 compliance, but the provider must supply the technical means to enable compliance (e.g. the AI identification mechanism).`
     },
     {
-      color:"#4CAD00",title:"✅ Alacsony / nulla kockázat",
-      meta:"Nincs különleges kötelezettség — önkéntes kódex",
-      detail:`Példák: spam szűrő · játékok AI-ja · legtöbb ajánlórendszer (ahol Art. 50 nem alkalmazandó) · belső produktivitás eszközök<br><br>
-      Önkéntes magatartási kódex alkalmazható — nem kötelező`
+      color:"#4CAD00",title:"✅ Minimal / No Risk",
+      meta:"No special obligations · Voluntary code of conduct",
+      detail:`<b>What falls here?</b> The vast majority of AI systems in use today — spam filters, recommendation engines, playlist generators, internal productivity tools, grammar checkers, route optimisation, scheduling AI — carry no specific AI Act obligations beyond the general laws that already apply (consumer protection, GDPR, etc.).<br><br>
+      <b>Examples:</b> Email spam filter that classifies messages; a game AI that controls NPC behaviour; a document search tool that ranks results; an internal meeting scheduling assistant; a translation tool used for internal communications.<br><br>
+      <b>What it is NOT:</b> Just because a system is minimal-risk doesn't mean Art. 50 (chatbot disclosure) can't apply. If the minimal-risk tool involves real-time AI interaction with users or generates synthetic content about real people, Art. 50 transparency obligations still kick in.<br><br>
+      <b>Voluntary codes of conduct:</b> The Commission encourages providers of minimal-risk AI to adopt voluntary codes of conduct, particularly around transparency, bias testing, and environmental impact. These are not mandatory but may become reputationally important — especially in B2B contexts where enterprise buyers increasingly conduct AI ethics audits.`
     }
   ],
   actors: [
-    {name:"Szolgáltató (Provider)",desc:"Fejleszti / forgalomba hozza az AI rendszert — legsúlyosabb kötelezettségek"},
-    {name:"Alkalmazó (Deployer)",desc:"Saját hatáskörben használja az AI rendszert — másodlagos kötelezettségek"},
-    {name:"Importőr",desc:"Nem EU providertől származó rendszert hoz EU piacra"},
-    {name:"Forgalmazó",desc:"Módosítás nélkül teszi elérhetővé — legkisebb teher"}
+    {name:"Provider (Art. 3(3))",desc:"Develops or places the AI system on the EU market. Heaviest obligations: QMS, technical documentation, conformity assessment, CE marking, EU database registration. If you build and sell an AI product — you are the provider."},
+    {name:"Deployer (Art. 3(4))",desc:"Uses an AI system under its own authority in a professional context. Lighter but real obligations: human oversight, incident reporting, worker notification, FRIA for public bodies. If you use a vendor AI tool in your own business process — you are the deployer."},
+    {name:"Importer (Art. 3(6))",desc:"Places on the EU market an AI system from a non-EU provider. Effectively steps into provider obligations when the provider is outside the EU and does not appoint an EU representative."},
+    {name:"Distributor (Art. 3(7))",desc:"Makes an AI system available on the EU market without modification. Lightest burden — primarily verify CE marking and documentation exist. Becomes a provider if it modifies the system or places it under its own name."}
   ],
   modules: [
     {
-      badge:"prohibited",badgeText:"Tiltott",
-      title:"Nagy kockázat: compliance útmutató",
-      meta:"QMS · Műszaki dok. · CE · 2027.12.02",
+      badge:"prohibited",badgeText:"High-Risk",
+      title:"High-Risk AI: Compliance Roadmap",
+      meta:"QMS · Technical docs · CE marking · Dec 2027",
       items:[
-        {icon:"⚠️",text:"<b>QMS (Art. 17):</b> írásban rögzítve, életciklus-szintű — KKV-nak méretarányos verzió elegendő"},
-        {icon:"⚠️",text:"<b>Műszaki dokumentáció (Art. 11):</b> piac ELŐTT elkészíteni — 9 kötelező elem — 10 évig megőrizni"},
-        {icon:"⚠️",text:"<b>Emberi felügyelet (Art. 14):</b> megállítható, beavatkozható, felülbírálható — 3 szint meghatározása"},
-        {icon:"⚠️",text:"<b>Conformity assessment (Art. 43):</b> önértékelés főszabály (nem biometrikus rendszereknél) — NAH bejelentett szervezet"},
-        {icon:"⚠️",text:"<b>EU-adatbázis + CE-jelölés (Art. 49):</b> regisztráció a piac előtt — szoftvernél digitálisan elhelyezhető"},
-        {icon:"⚠️",text:"<b>Incidens határidők:</b> 15 nap (általános) / 10 nap (halálos) / 2 nap (kritikus infra.)"},
-        {icon:"⚠️",text:"<b>Lényeges módosítás:</b> ha módosítod a rendszert → teljes conformity assessment újra"},
+        {icon:"📋",text:"<b>Quality Management System (Art. 17):</b> A written set of policies, procedures, and controls covering the full AI system lifecycle — from design decisions through training, testing, deployment, and post-market monitoring. For SMEs, the regulation explicitly allows a proportionate version. Key point: it must exist as a real document before market launch, not as a retroactive description."},
+        {icon:"📄",text:"<b>Technical Documentation (Art. 11 + Annex IV):</b> Nine mandatory elements including: system description and intended purpose, development methodology, training data description, performance metrics, risk management measures, human oversight mechanisms, and post-market monitoring plan. Must be created before placing the system on the market. Retained for 10 years. This is the document you will be asked for in every serious M&A DD."},
+        {icon:"👁️",text:"<b>Human Oversight (Art. 14):</b> The system must be designable so that a natural person can: (a) understand what the system does and how it reaches outputs; (b) monitor the system during operation; (c) override or disregard outputs; (d) stop the system if needed. Three levels exist: human-in-the-loop (approves each decision), human-on-the-loop (monitors and can intervene), human-in-command (sets parameters and reviews periodically). The deployer must designate a specific person responsible."},
+        {icon:"✅",text:"<b>Conformity Assessment (Art. 43):</b> The process of verifying that your high-risk system meets all applicable requirements before market launch. For most Annex III systems, this is self-assessment — the provider documents compliance internally. For biometric identification systems and law enforcement AI, a third-party accredited notified body must conduct the assessment. Important: if you make a 'substantial modification' to the system, a new conformity assessment is required."},
+        {icon:"🗄️",text:"<b>EU Database Registration + CE Marking (Art. 49):</b> Before placing a high-risk system on the EU market, the provider must register it in the EU AI database maintained by the Commission. The CE marking must be affixed to the system — for software, this can be done digitally in documentation and the user interface. No CE mark = no market access, regardless of actual quality."},
+        {icon:"🚨",text:"<b>Incident Reporting Deadlines:</b> Serious incidents (those causing death, serious harm, or significant property damage) must be reported to the national market surveillance authority. Deadlines: 15 days for general serious incidents; 10 days if the incident involved or may have caused death; 2 days for incidents involving critical infrastructure. The deployer reports to the provider; the provider reports to the authority."},
+        {icon:"🔄",text:"<b>Substantial Modification (Art. 43(4)):</b> If you modify your high-risk system in a way that affects its compliance with the Act — new training data, changed intended purpose, modified outputs, new risk profile — the entire conformity assessment must be repeated. This is particularly relevant for SaaS products with continuous model updates. Define 'substantial modification' explicitly in your internal governance policy to avoid uncertainty."},
       ],
-      note:"Magyar hatóság: MI Piacfelügyeleti Hatósági Főosztály (Gazdasági és Energetikai Min., 2026.05.14-től)"
+      note:"Hungarian authority: AI Market Surveillance Department (Ministry of Economy and Energy, operational from 14 May 2026)"
     },
     {
       badge:"gpai",badgeText:"GPAI",
-      title:"GPAI modellek a termékedben",
-      meta:"Art. 25(2) · downstream helyzet · SRMI",
+      title:"GPAI Models in Your Product",
+      meta:"Art. 25(2) · Downstream position · SRMI threshold",
       items:[
-        {icon:"🧠",text:"<b>Ha GPT-4/Claude API-t használsz:</b> downstream szolgáltató vagy — az OpenAI/Anthropic a GPAI provider"},
-        {icon:"🧠",text:"<b>Art. 25(2) jogod:</b> a GPAI providertől kérheted az Annex XII dokumentációt a saját compliance-edhez"},
-        {icon:"🧠",text:"<b>SRMI küszöb:</b> ≥10²⁵ FLOP betanítás → extra kötelezettségek (adversarial testing, AI Hivatal incidens jelzés)"},
-        {icon:"🧠",text:"<b>Nyílt forrású modell (Llama stb.):</b> részleges mentesség — de dokumentáció kötelező marad"},
-        {icon:"🧠",text:"<b>Szerződéses klauzula szükséges:</b> API feltételek általában nem fedik az Art. 25(2) kötelezettséget — tárgyalni kell"},
+        {icon:"🔗",text:"<b>You use GPT-4/Claude API — what does that make you?</b> You are the downstream AI system provider. OpenAI/Anthropic is the GPAI model provider under Title VIII. These are separate regulatory roles. When you build a specific-purpose product (e.g. a credit scoring tool, an HR screening system) on top of a GPAI model, you are the provider of that AI system — with full provider obligations if the system is high-risk. OpenAI's compliance with GPAI rules does not satisfy your obligations."},
+        {icon:"📥",text:"<b>Art. 25(2) — Your documentation right:</b> GPAI providers are required to make available to downstream providers the technical documentation necessary to demonstrate compliance with high-risk AI obligations. This is codified in Annex XII. In practice: you can request from OpenAI/Anthropic the training data summary, performance benchmarks, and technical specifications needed to complete your conformity assessment. This right exists in law but is NOT in standard API terms. It is a negotiated addendum."},
+        {icon:"⚡",text:"<b>SRMI — Systemic Risk threshold:</b> Models trained with ≥10²⁵ FLOP computational capacity are presumed to present systemic risk. They face additional obligations beyond regular GPAI rules: mandatory adversarial testing (red-teaming) against the most concerning risks; reporting of serious incidents to the EU AI Office; cybersecurity measures; and energy consumption and environmental impact reporting. The AI Office maintains a list of designated SRMI models."},
+        {icon:"🔓",text:"<b>Open-source GPAI models (Llama, Mistral open weights):</b> If model weights and parameters are publicly available under a permissive open licence, the provider is exempt from Annex XII documentation requirements and certain transparency obligations. However: training data summaries and copyright compliance documentation are still required. And SRMI rules apply to open-source models above the FLOP threshold regardless of licence — open-source is not a shield against systemic risk obligations."},
+        {icon:"📝",text:"<b>What your vendor contract must contain:</b> Standard API terms from major GPAI providers (as of May 2026) do not fully address AI Act downstream obligations. For high-risk use cases, you need a bespoke addendum covering: Art. 25(2) Annex XII documentation delivery; notification of model changes affecting compliance; audit rights; and allocation of liability for GPAI-level compliance failures. This is a negotiation point, not a take-it-or-leave-it."},
       ],
-      note:"Határidő: 2026.08.02 — GPAI Title VIII kötelezettségek alkalmazandók"
+      note:"GPAI compliance deadline: 2 August 2026 — Title VIII obligations fully applicable"
     },
     {
       badge:"dd",badgeText:"DD",
-      title:"DD ellenőrzőlista — 7 kérdés",
-      meta:"Aláírás előtt kötelező átvilágítás",
+      title:"Due Diligence Checklist — 7 Questions",
+      meta:"Mandatory review before signing any AI deal",
       items:[
-        {icon:"🔍",text:"<b>Nagy kockázatú-e?</b> Annex III szektorlista alapján — dokumentált önbesorolás szükséges"},
-        {icon:"🔍",text:"<b>Van QMS?</b> Ki az MI-megfelelőségi felelős? Írásban rögzítve?"},
-        {icon:"🔍",text:"<b>Elkészült a műszaki dokumentáció?</b> Annex IV — datálva a piac előtt"},
-        {icon:"🔍",text:"<b>Volt conformity assessment?</b> Önértékelés vagy notified body — melyik szükséges?"},
-        {icon:"🔍",text:"<b>Milyen GPAI modell van beépítve?</b> Van Art. 25(2) dokumentáció a providertől?"},
-        {icon:"🔍",text:"<b>EU-adatbázisban regisztrálva?</b> Határidő: piaci bevezetés előtt"},
-        {icon:"🔍",text:"<b>Volt-e bejelentett súlyos incidens?</b> Incidenskezelési eljárás dokumentálva?"},
+        {icon:"🔍",text:"<b>Is the system high-risk?</b> Map every AI function against the Annex III sector list. The classification decision must be documented in writing — not just known internally. Ask for the written classification rationale. If the answer is 'we don't think so but we haven't documented it', that is an immediate red flag. No documented classification = no defensible position against a regulator."},
+        {icon:"🔍",text:"<b>Is there a QMS?</b> Ask specifically: who is the designated AI compliance officer? Is the QMS in writing? When was it last reviewed? Does it cover post-market monitoring? A verbal 'yes we have processes' is not a QMS. Ask to see it. Absence of a written QMS for a high-risk system is a material gap that affects market access, not just a fine risk."},
+        {icon:"🔍",text:"<b>Does technical documentation exist?</b> Request the Annex IV document. Check the creation date — it must predate market launch. Check that it contains all 9 required elements (system description, intended purpose, development process, training data, performance metrics, risk management, human oversight, post-market plan, changes log). Missing elements or a document clearly written retroactively = representation risk in M&A."},
+        {icon:"🔍",text:"<b>Was conformity assessment completed?</b> Self-assessment or notified body — which was required and which was done? For biometric or law enforcement AI, self-assessment is not sufficient. For other high-risk categories, self-assessment is fine but must be documented. Ask for the assessment report. If the system was modified substantially since the last assessment, a new one is required."},
+        {icon:"🔍",text:"<b>What GPAI model is embedded?</b> Identify every third-party AI model integrated into the product. For each: is there an Art. 25(2) documentation agreement in place? Does the vendor contract include the right to receive Annex XII documentation? Are there notification obligations if the model is updated in a way that affects compliance? Most pre-2025 vendor agreements are silent on all of this."},
+        {icon:"🔍",text:"<b>Is the system registered in the EU database?</b> Providers of high-risk AI systems must register before market launch. Ask for the registration reference. No registration = the system is technically not lawfully on the EU market, regardless of its actual quality. This is an operational risk (regulators can require withdrawal) and an M&A liability."},
+        {icon:"🔍",text:"<b>Have any serious incidents been reported?</b> Ask for the incident log. Were any serious incidents reported to the national authority? What remediation was taken? An unreported incident that should have been reported is an active regulatory exposure that transfers to the acquirer. Three or more 'NO' answers across these 7 questions = price it, condition the closing, or walk."},
       ],
-      note:"Red flag: ha 3+ kérdésre NEM a válasz → M&A-ban árazni vagy feltételhez kötni a zárást"
+      note:"Red flag threshold: 3+ NO answers → price the gap in the deal, add escrow, or make remediation a pre-closing condition"
     },
     {
       badge:"limited",badgeText:"Art. 50",
-      title:"Tiltott gyakorlatok SaaS-ra",
-      meta:"Art. 5 · 8-ból a 3 releváns · 2025.02 óta",
+      title:"Prohibited Practices for SaaS",
+      meta:"Art. 5 · 3 of 8 most relevant · In force Feb 2025",
       items:[
-        {icon:"🚫",text:"<b>Szublimális manipuláció:</b> dark pattern + AI kombó, persuasion engine, agresszív személyre szabás"},
-        {icon:"🚫",text:"<b>Érzelemfelismerés munkahelyen:</b> webcam mood detection, munkahelyi sentiment monitoring TILTOTT"},
-        {icon:"🚫",text:"<b>Social scoring:</b> felhasználói magatartás alapján összefüggéstelen kontextusban hátrányos döntés"},
-        {icon:"✓",text:"<b>Szürkezóna:</b> HR analitika, engagement scoring, mood detection → mindig jogi elemzés szükséges"},
-        {icon:"✓",text:"<b>Nincs átmeneti idő:</b> 2025.02.02 óta azonnali megszüntetés kötelező — SD/kártérítési kockázat"},
+        {icon:"🚫",text:"<b>Subliminal manipulation — the grey zone:</b> The ban targets AI that exploits psychological vulnerabilities or bypasses conscious decision-making to cause harm. Pure UX optimisation is not banned. The line is crossed when: the AI actively circumvents the user's rational agency (not just persuades them), AND the outcome causes or is likely to cause harm. Dark patterns alone are UX law issues; dark patterns + AI amplification + harm = Art. 5 territory. Document your legal analysis if you operate near this line."},
+        {icon:"🚫",text:"<b>Emotion recognition in the workplace — no exceptions (except safety):</b> Webcam mood detection, keystroke sentiment analysis, voice tone monitoring during calls, facial expression tracking during video meetings — all prohibited in workplace and educational contexts. The only carve-out is genuine safety applications (driver fatigue detection, medical monitoring with consent). 'Improving employee experience' or 'personalising learning' are not safety justifications."},
+        {icon:"🚫",text:"<b>Social scoring — context-crossing is the issue:</b> The ban is not about scoring behaviour within a relevant context (a credit score based on credit history is fine). It is about taking a score from one context and using it to disadvantage someone in an unrelated context. Example: using a customer's platform engagement score to determine their eligibility for services in a completely unrelated domain. The harm must also be disproportionate to the behaviour that generated the score."},
+        {icon:"⚠️",text:"<b>Grey zone products requiring legal analysis:</b> HR analytics tools that score employee 'performance risk'; engagement scoring platforms used to determine priority access or pricing; mood-responsive content adaptation engines; recommendation systems that dynamically withhold options based on inferred psychological state. Each of these requires a documented legal analysis explaining why it does not meet the Art. 5 test — not just an assumption that it doesn't."},
+        {icon:"📅",text:"<b>No grace period — immediate compliance required:</b> Unlike high-risk obligations (Dec 2027 deadline), Art. 5 prohibitions applied from 2 February 2025 with no transitional period. Any ongoing deployment of a prohibited system creates daily liability. Remediation is not enough — the system must have stopped. In M&A: a target with an ongoing Art. 5 violation is not just a fine risk but a product shutdown risk. Close with eyes open or condition the closing on verified shutdown."},
       ],
-      note:"A többi 5 tiltott gyakorlat (biometria, bűnüldözés stb.) SaaS-ra tipikusan nem releváns — de check szükséges"
+      note:"The other 5 prohibited practices (real-time biometric surveillance, predictive policing, etc.) are typically not relevant for SaaS — but always run the checklist"
     }
   ],
   timeline: [
-    {status:"done",date:"2024. augusztus 1.",title:"AI Act hatálybalépés",body:"A rendelet hatályos. Fogalmak és hatály alkalmazandók. AI Hivatal felállítása."},
-    {status:"done",date:"2025. február 2.",title:"Tiltott gyakorlatok tilalma (Art. 5)",body:"Mind a 8 tiltott gyakorlat érvényes. Azonnali vizsgálat szükséges: ATS, érzelemfelismerés, social scoring."},
-    {status:"done",date:"2025. augusztus 2.",title:"GPAI + AI governance kötelezettségek",body:"Title VIII teljes egészében alkalmazandó. Magyar MI Piacfelügyeleti Főosztály felállítása."},
-    {status:"now",date:"2026. május ◀ TE ITT VAGY",title:"Felkészülési ablak",body:"AI omnibus politikai megállapodás (2026.05.07). GPAI határidő közeleg. DD-k és szerződések AI Act-tudatosan."},
-    {status:"future",date:"2026. augusztus 2.",title:"GPAI kötelezettségek — teljes alkalmazás",body:"Art. 25(2) dokumentációs jogok érvényesek. API szerződések AI Act addendummal szükségesek."},
-    {status:"future",date:"2027. december 2. ← ÚJ HATÁRIDŐ",title:"Önálló nagy kockázatú AI rendszerek",body:"QMS, műszaki dok., conformity assessment, CE-jelölés, EU-regisztráció kötelező. (EP–Tanács megállapodás, 2026.05.07.)"},
-    {status:"future",date:"2028. augusztus 2.",title:"Termékbe ágyazott nagy kockázatú rendszerek",body:"Orvostechnikai eszközbe, járműbe, gépbe épített AI rendszerek teljes compliance határideje."}
+    {status:"done",date:"1 August 2024",title:"AI Act enters into force",body:"The Regulation is binding EU law. Definitions, scope, and general provisions apply. The EU AI Office is established within the European Commission with supervisory authority over GPAI models."},
+    {status:"done",date:"2 February 2025",title:"Prohibited practices ban applies (Art. 5)",body:"All 8 prohibited AI practices are enforceable. No grace period. Immediate audit required for: AI applicant tracking systems, emotion recognition tools, social scoring systems, subliminal manipulation features. Ongoing violations create active regulatory exposure."},
+    {status:"done",date:"2 August 2025",title:"GPAI obligations + AI governance framework apply",body:"Title VIII fully applicable to all GPAI model providers. Codes of practice for GPAI become relevant. National AI authorities must be operational. Hungary: AI Market Surveillance Department established under Ministry of Economy and Energy."},
+    {status:"now",date:"May 2026 ◀ YOU ARE HERE",title:"Preparation window — critical period",body:"AI Omnibus political agreement reached (7 May 2026) — some deadlines and procedures are being amended, monitor closely. GPAI compliance deadline is in 3 months (2 Aug 2026). All new DD processes and SaaS contracts should be AI Act-aware. High-risk deadline (Dec 2027) is 18 months away — enough time to build compliance, not enough to ignore it."},
+    {status:"future",date:"2 August 2026",title:"GPAI obligations — full application",body:"Art. 25(2) documentation rights fully enforceable. GPAI providers must deliver Annex XII documentation to downstream integrators on request. API agreements without AI Act addenda are non-compliant for high-risk use cases. Regulatory sandbox framework must be available in all member states."},
+    {status:"future",date:"2 December 2027 ← NEW DEADLINE (AI Omnibus)",title:"Standalone high-risk AI systems — full compliance",body:"QMS, technical documentation, human oversight mechanisms, conformity assessment, CE marking, and EU database registration all mandatory for standalone high-risk AI systems. This deadline was shifted from the original August 2026 under the AI Omnibus agreement (EP-Council, 7 May 2026). Verify the final text."},
+    {status:"future",date:"2 August 2028",title:"Embedded high-risk AI systems — full compliance",body:"High-risk AI systems embedded in products already covered by other EU product safety legislation (medical devices, vehicles, machinery, toys) must achieve full compliance. These products combine AI Act obligations with existing sector-specific conformity requirements — the most complex compliance scenario."}
   ]
 };
 
 
 // ─────────────────────────────────────────────────────
-// SECTION 3 — LESSONS DATA
-// To add a lesson: append an object to LESSONS array
-// Each lesson has: id, title, time, chunks[]
-// Each chunk has: label, tag, story, players, consequences,
-//   mapActive(0-4), question, choices[], correct(0-2),
-//   explanation, legal, payoffs[]
+// SECTION 3 — LESSONS DATA (ENGLISH)
 // ─────────────────────────────────────────────────────
 const LESSONS = [
-  {id:1,title:"Mi az AI Act és miért létezik?",time:"~10 perc",chunks:[
-    {label:"A történet",tag:"Miről szól",
-     story:"Az EU észrevette, hogy az AI rendszerek következményes döntéseket hoznak emberekről — ki kap hitelt, ki megy át az álláspályázati szűrőn, kit jelöl ki a határellenőrzés — mindenféle szabályozás nélkül. Az AI Act ezt a hiányt tölti be: egységes EU-s keret, ahol a kötelezettség szintje a kockázat szintjét követi. Minél nagyobb a tét, annál több a szabály.",
-     players:"Három szereplő fut végig minden helyzeten. A szolgáltató fejleszti és piacra hozza az AI rendszert — pl. Workpath ATS-t épít. Az alkalmazó ezt a rendszert saját üzleti kontextusban használja — pl. egy munkáltató HR folyamatban alkalmazza. Az érintett személy az, akinek az életét az output érinti — a rangsorolt álláspályázó.",
-     consequences:"Ha egy AI rendszer kárt okoz és senki nem vonható felelősségre, az Act ezt szabályozási kudarcként kezeli. Bírság: €35M vagy a globális forgalom 7%-a — GDPR-nál is magasabb. A közvetlen kockázat azonban a piaci hozzáférés: megfelelőség-értékelés nélküli nagy kockázatú AI rendszer törvényesen nem hozható EU piacra.",
+  {id:1,title:"What is the AI Act and Why Does It Exist?",time:"~10 min",chunks:[
+    {label:"The Story",tag:"Overview",
+     story:"By the early 2020s, AI systems were making consequential decisions about people across Europe without any harmonised legal framework. An AI could reject your mortgage application, filter your CV before a human ever saw it, or flag you as a border security risk — all without you knowing why, without meaningful recourse, and without the company deploying the AI being accountable in any structured way. The EU identified this as a fundamental governance gap. The AI Act (Regulation 2024/1689) is its answer: a single framework where the level of obligation matches the level of risk. The more consequential the AI decision, the more rigorous the compliance requirements. This is not a prohibition on AI — it is a market access and accountability framework, modelled on the same CE marking logic that governs medical devices and machinery.",
+     players:"Three roles run through every AI Act scenario. The <b>provider</b> develops the AI system and places it on the EU market — for example, Workpath builds an AI-powered applicant tracking system (ATS) and sells it to HR departments. The <b>deployer</b> uses that system under its own authority in a professional context — for example, a Hungarian employer uses the ATS to filter candidates for an open role. The <b>affected person</b> is the natural person whose life is affected by the system's output — the ranked or rejected job applicant. These roles are cumulative: a SaaS company can simultaneously be a deployer of a GPAI model (using OpenAI's API) and a provider of its own downstream AI system (the ATS product it built on top of that API).",
+     consequences:"The AI Act operates primarily as a <b>market access regulation</b>, not just a fine system. A high-risk AI system without a completed conformity assessment cannot lawfully be placed on the EU market — full stop, regardless of how good the technology is or how responsibly it is being used. The fines exist too: up to €35 million or 7% of global annual turnover (whichever is higher) for the most serious violations — higher even than GDPR. But in practice, the first consequence a regulator will reach for is market withdrawal, not a fine. This reframes the risk for your clients: it is not 'we might get fined at some point' — it is 'our product might be pulled from the market tomorrow if we have not done the paperwork correctly'.",
      mapActive:0,
-     question:"Egy SaaS ügyfél AI rendszere álláspályázókat rangsorol. Nem ők fejlesztették a modellt — licencelték. Mi a legközvetlenebb következménye, ha megfelelőség-értékelés nélkül helyezik el az EU piacon?",
-     choices:["Legfeljebb €35M bírság — de a termék piacon maradhat amíg korrigálják","A termék törvényesen nem hozható EU piacra — piaci hozzáférés blokkolva, minőségtől függetlenül","Nincs azonnali következmény — az Act csak a modell fejlesztőjére vonatkozik, nem a licencbevevőre"],
+     question:"A SaaS client's AI system ranks job applicants automatically. They licensed the underlying model — they did not build it. What is the most immediate consequence if they place it on the EU market without a completed conformity assessment?",
+     choices:["A fine of up to €35M — but the product can stay on the market while they remediate","The product cannot lawfully be placed on the EU market — market access is blocked regardless of the system's technical quality","No immediate consequence — the Act applies to the model developer, not to a company that licensed it"],
      correct:1,
-     explanation:"B helyes. Az AI Act piaci hozzáférési szabályozás, nem csak bírságrendszer. Megfelelőség-értékelés nélküli nagy kockázatú rendszer nem kerülhet piacra — mielőtt bármilyen bírságot számolnánk. Ugyanez a logika mint a CE-jelölésnél: nincs tanúsítvány, nincs piac.",
-     legal:"Art. 6(2) + III. Melléklet: nagy kockázatú besorolás. Art. 43: megfelelőség-értékelési kötelezettség. Art. 49: regisztráció a piac előtt.",
+     explanation:"B is correct. The AI Act is a market access regulation first. A high-risk system without conformity assessment is not lawfully on the market — this is the threshold question before any fine calculation. The CE marking analogy is exact: no conformity assessment, no market access, period. The fact that the client licensed rather than built the model does not change this — they are the provider of the downstream AI system they placed on the market.",
+     legal:"Art. 6(2) + Annex III: high-risk classification. Art. 43: conformity assessment obligation. Art. 49: registration before market launch. Art. 99: penalty framework.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Kérdezd: van conformity assessment? Van műszaki dokumentáció? EU-adatbázisban vannak? Ha bármelyikre NEM → anyagi hiány. Árazni vagy feltételhez kötni."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"SaaS MSA-ban: szállító szavatolja a piac előtti conformity assessment elvégzését. Nem-teljesítés = lényeges szerződésszegés."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Mondd el az ügyfeleknek: piaci hozzáférés a tét, nem csak bírság. Compliance a launch előtt, nem után."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"In any AI-related DD: ask first whether conformity assessment was completed, whether technical documentation exists, and whether the system is registered in the EU database. A no to any of these for a high-risk system is a material gap that affects market access — not just a fine risk. Price it, escrow it, or condition the closing."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In SaaS MSAs where the vendor supplies a high-risk AI product: the vendor warrants that conformity assessment was completed before delivery and that a valid CE marking and EU registration exist. Non-compliance constitutes a material breach. This warranty should survive closing."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"When advising SaaS clients launching AI products: frame compliance as a precondition for market access, not a post-launch to-do. The conformity assessment must be completed, documented, and dated before the first EU customer goes live. Retrofitting it later creates a retroactive gap that is hard to defend."}
      ]
     }
   ]},
-  {id:2,title:"Szolgáltató vagy alkalmazó? A SaaS felosztás",time:"~10 perc",chunks:[
-    {label:"A történet",tag:"Ki kicsoda",
-     story:"Egy SaaS cég a legexponáltabb pozícióban van az AI Act ellátási láncban. Ha harmadik fél AI modelljét — pl. OpenAI API-t — integrálja és értékesíti, egyszerre a saját AI rendszerének szolgáltatója és az alapmodell downstream alkalmazója. Az Act nem engedi, hogy a compliance terhet exportálják OpenAI-ra. Aki a célspecifikus rendszert megépíti és piacra hozza, az a szolgáltató — függetlenül attól, kinek a modellje van alatta.",
-     players:"A szolgáltató az, aki az AI rendszert fejleszti vagy EU piacra hozza — Art. 3(3). A GPAI modell providere (pl. OpenAI) külön rezsimben van (Title VIII). A GPAI modellt integráló SaaS cég a downstream AI rendszer szolgáltatója. Ezek különálló jogi szerepek különálló kötelezettségekkel.",
-     consequences:"Ha az ügyfél finomhangolja a modellt, lényeges módosítást végez, vagy anyagi tervezési döntéseket hoz az AI működéséről — ő a szolgáltató. Ha változtatás nélkül adja tovább az outputot — még akkor is lehet a kézbesítési réteg szolgáltatója. A biztonságos kikötő szűk: csak a rendszert módosítás nélkül elérhetővé tevő forgalmazónak van könnyebb terhe.",
+  {id:2,title:"Provider or Deployer? The SaaS Role Split",time:"~10 min",chunks:[
+    {label:"The Story",tag:"Who Is Who",
+     story:"A SaaS company building an AI-powered product occupies the most exposed position in the AI Act supply chain. Take Workpath: they build an applicant tracking system that uses OpenAI's GPT-4 API to rank CVs. In this structure, OpenAI is the GPAI model provider (Title VIII applies to them). Workpath is the provider of the downstream AI system — the ATS product — because they designed its purpose, made the architectural decisions, and are placing it on the EU market. The compliance obligations of OpenAI under Title VIII do not flow down to cover Workpath's obligations as an AI system provider. These are two separate regulatory regimes. The most common mistake SaaS companies make is assuming that 'we did not build the model, so we are just a deployer'. That is wrong. If you built a purpose-specific product around the model and sell it to customers, you are the provider of that product.",
+     players:"The <b>provider</b> (Art. 3(3)) is the entity that develops or places the AI system on the EU market — this is Workpath. The <b>GPAI model provider</b> (e.g. OpenAI) is separately regulated under Title VIII — they are not the provider of Workpath's ATS. The <b>deployer</b> (Art. 3(4)) is the entity that uses Workpath's ATS under its own authority — the employer HR department. The employer is a deployer; Workpath is a provider. A company becomes a provider the moment it makes design decisions about how an AI system behaves and places the result on the market under its own name.",
+     consequences:"The practical test: if your client fine-tunes the model, makes architectural decisions about its behaviour, defines its intended purpose, and sells the resulting product — they are the provider. The safe harbour for 'we are just a distributor' is narrow: it applies only to entities that make a system available without modification and without placing it under their own brand. Art. 25(1) makes clear that a downstream integrator who places the resulting system on the market becomes the provider of that system. The compliance export logic — 'we used OpenAI's model so it is OpenAI's problem' — has no legal basis in the Act.",
      mapActive:2,
-     question:"Workpath egy magyar SaaS cég. Olyan ATS-t építenek, amely OpenAI API-t használ CV-k automatikus rangsorolásához. Az AI Act szerint mi Workpath elsődleges jogi szerepe?",
-     choices:["Alkalmazó — OpenAI modelljét használják, OpenAI viseli a compliance terhet","Szolgáltató — AI rendszert építenek és értékesítenek munkáltatóknak, függetlenül attól kinek a modellje van alatta","Forgalmazó — OpenAI képességét értékesítik tovább, ők az elsődleges kötelezettségi láncon kívül vannak"],
+     question:"Workpath is a Budapest-based SaaS company. They built an ATS that uses the OpenAI API to automatically rank CVs, and sell it to employers across the EU. Under the AI Act, what is Workpath's primary legal role?",
+     choices:["Deployer — they use OpenAI's model, so OpenAI bears the compliance burden","Provider — they built and placed an AI system on the EU market, regardless of whose model is underneath","Distributor — they are reselling OpenAI's capability and fall outside the primary obligation chain"],
      correct:1,
-     explanation:"B helyes. Workpath célspecifikus rendszert épített és hozott piacra. Az OpenAI Title VIII szerinti GPAI provider — külön kategória. Workpath, mint az ATS tervezési döntéseit meghozó downstream integrátor, az ATS szolgáltatója. Az ATS az III. Melléklet §4 alá esik (foglalkoztatás) → nagy kockázatú → Workpath futtatja a conformity assessment-et, nem OpenAI.",
-     legal:"Art. 3(3): szolgáltató meghatározás. Art. 25(1): downstream integrátor = szolgáltató. III. Melléklet §4: foglalkoztatás screening = nagy kockázat. Art. 9–15: nagy kockázatú rendszer szolgáltatói kötelezettségek.",
+     explanation:"B is correct. Workpath built a purpose-specific system (the ATS), made design decisions about it, and placed it on the EU market. OpenAI is the GPAI model provider under Title VIII — a separate category. Workpath is the provider of the ATS. The ATS falls under Annex III §4 (employment screening) — high-risk — Workpath runs the conformity assessment, not OpenAI.",
+     legal:"Art. 3(3): provider definition. Art. 25(1): downstream integrator = provider. Annex III §4: employment screening = high-risk. Art. 9–15: provider obligations for high-risk systems.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Kulcs DD kérdés: a target conformity assessment-et csinált mint szolgáltató, vagy úgy gondolják hogy 'csak alkalmazók'? A saját szerepük félreértése a leggyakoribb compliance gap SaaS AI targetekben."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"Workpath ügyfél MSA-jában: a nem-megfelelő AI outputért való felelősség Workpath-on van mint szolgáltatón — nem OpenAI-on, nem a munkáltatón. Indemnity carve-outok tükrözzék ezt. Plusz: kötelezd OpenAI-t Art. 25(2) dokumentáció szállítására."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Mondd el a SaaS ügyfeleknek GPAI API-t építőknek: más modelljének használata nem exportálja a compliance terhét. Te vagy a szolgáltató. Építsd be az Art. 9 kockázatkezelési rendszert és az Annex IV műszaki dokumentációt a következő fundraise előtt."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"The most common compliance gap in SaaS AI targets: the company believes it is 'just a deployer' because it uses a third-party model. Ask directly: did the target complete a conformity assessment as a provider? If they say 'we do not need to, we are a deployer', that is the red flag. Their role is almost certainly provider, and the compliance obligations are absent."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In Workpath's customer MSA: liability for non-compliant AI outputs sits with Workpath as provider — not with OpenAI, not with the employer. Indemnity carve-outs must reflect this. Separately: Workpath's vendor agreement with OpenAI must include Art. 25(2) documentation rights — the right to receive Annex XII technical documentation needed for Workpath's own conformity assessment."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"Advise SaaS clients building on GPAI APIs early: using someone else's model does not export your compliance obligations. You are the provider. Build the Art. 9 risk management system and the Annex IV technical documentation into your product development cycle — not as a fundraise deliverable, but as a pre-launch gate."}
      ]
     }
   ]},
-  {id:3,title:"Mi tiltott — és fontos-e a SaaS-nak?",time:"~8 perc",chunks:[
-    {label:"A történet",tag:"Miről szól",
-     story:"Az Art. 5 nyolc AI gyakorlatot tilt meg teljesen — nincs kivétel, nincs conformity assessment, nincs sandbox menekülő. Ezek a tilalmak 2025. február 2. óta hatályosak. Ha az ügyfélnek ilyen kategóriába eső rendszere van, azonnal le kell állítani. A bírság a legmagasabb az Act-ben: €35M vagy a globális forgalom 7%-a. A tilalmak nem a technológiáról szólnak, hanem az AI specifikus felhasználásairól amelyeket az EU összeegyeztethetetlennek talált az alapjogokkal.",
-     players:"A tilalom minden olyan szolgáltatóra vagy alkalmazóra vonatkozik, aki a tiltott rendszert EU-ban helyezi el vagy használja — függetlenül attól, hogy a cég hol van bejegyezve. Nincs KKV-mentesség a tiltott gyakorlatokra.",
-     consequences:"A SaaS-ra vonatkozó gyakorlati kockázat az élek-esetbeli besorolás — funkciók, amelyek nem nyilvánvalóan tilottak, de amelyeket egy hatóság a tilalom alá esőnek minősíthet. A szublimális manipuláció tilalma (Art. 5(1)(a)) különösen széles: tudatalatti technikák amelyek torzítják a magatartást és kárt okoznak. Dark patternok az UX-ben, agresszív személyre szabás és persuasion engine-ek mind a szürkezónában vannak.",
+  {id:3,title:"What Is Prohibited — Does It Matter for SaaS?",time:"~8 min",chunks:[
+    {label:"The Story",tag:"The Hard Bans",
+     story:"Art. 5 lists eight AI uses that are completely banned — no conformity assessment makes them lawful, no sandbox exception saves them, no proportionality argument applies. These are prohibitions that require the AI system to stop existing in its current form. They have been in force since 2 February 2025, with no transitional period. The fine for violation is the highest in the entire Act: €35 million or 7% of global annual turnover. But the fine is almost secondary — the immediate consequence is that the system must be shut down, and any ongoing deployment creates daily liability. For M&A transactions, a target with an active Art. 5 violation is not just a fine risk — it is a product shutdown risk. That changes the deal calculus entirely.",
+     players:"The prohibition applies to any provider or deployer that deploys or uses a prohibited system in the EU — regardless of where the company is incorporated. There is no SME exemption for Art. 5. There is no 'we did not know' defence once the product is live. In M&A, the acquirer inherits any ongoing Art. 5 violation the moment the deal closes.",
+     consequences:"The practical grey zone for SaaS is large. The three bans most likely to catch SaaS products are: (1) subliminal manipulation — AI that exploits unconscious psychology to distort behaviour in a way that causes harm; (2) emotion recognition in the workplace — any AI inferring employee emotions during work; (3) social scoring — using AI-generated scores in unrelated contexts to disadvantage individuals. Many SaaS features sit close to these lines. A persuasion optimisation engine, an employee engagement analytics platform, or AI-driven dynamic pricing may cross into prohibited territory depending on design. 'We do not think we are prohibited' is not a legal position — it needs to be documented analysis.",
      mapActive:1,
-     question:"Egy startup SaaS terméke AI modellt használ, amely webcamon keresztül elemzi a munkavállalók arckifejezéseit munkaidőben, és 'hangulati pontszámot' generál a menedzsment számára. Az Art. 5 szerint ez:",
-     choices:["Nagy kockázat (III. Melléklet §4) — engedélyezett conformity assessment-tel és emberi felügyelettel","Tiltott — a munkahelyi érzelemfelismerés kifejezetten tiltott az Art. 5(1)(f) alapján","Korlátozott kockázat (Art. 50) — munkavállalóknak való közzététellel egyébként engedélyezett"],
+     question:"A startup's SaaS HR product uses an AI model that analyses employees' facial expressions via webcam during work hours and generates a 'mood score' for management. Under Art. 5, this is:",
+     choices:["High-risk (Annex III §4) — permitted with conformity assessment and human oversight","Prohibited — workplace emotion recognition is explicitly banned under Art. 5(1)(f)","Limited risk (Art. 50) — permitted with disclosure to employees"],
      correct:1,
-     explanation:"B helyes. Az Art. 5(1)(f) kifejezetten tiltja az AI rendszereket, amelyek természetes személyek érzelmeit inferálják vagy észlelik munkakörnyezetben. Ez teljes tilalom — semmiféle conformity assessment nem teheti megfelelővé, semmiféle közzétételi kötelezettség nem helyettesíti a tilalmat. A rendszert le kell állítani.",
-     legal:"Art. 5(1)(f): munkahelyi érzelemfelismerés tilalma. Art. 5(1)(a): szublimális manipuláció. Art. 99(3): €35M vagy 7% bírság az Art. 5 megsértéséért. Hatályos: 2025.02.02.",
+     explanation:"B is correct. Art. 5(1)(f) explicitly prohibits AI systems that infer or detect emotions of natural persons in workplace settings. This is an outright ban — no conformity assessment makes it lawful, no disclosure requirement substitutes for the prohibition. The system must be shut down. The only exception is genuine safety applications such as driver fatigue detection. 'Improving employee experience' does not qualify.",
+     legal:"Art. 5(1)(f): workplace emotion recognition ban. Art. 5(1)(a): subliminal manipulation ban. Art. 99(3): €35M or 7% penalty for Art. 5 violations. In force: 2 February 2025.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"HR tech, munkavállalói monitoring és produktivitás analitika a legmagasabb kockázatú kategóriák Art. 5 jogsértésre. DD-ben: minden munkavállalóra irányuló AI funkciót térképezd fel a tiltott lista alapján — először."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"SaaS ügyfélmegállapodásban: tiltott-gyakorlat reps and warranties. A szállító szavatolja hogy a rendszer egyetlen funkciója sem minősül tiltott gyakorlatnak az Art. 5 alapján. Ez átfolyik az M&A reps and warranties-be."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"A szublimális manipuláció körüli szürkezóna nagy. Bármely SaaS ügyfél, amely persuasion-optimalizáló AI-t, recommendation engine-t vagy dynamic pricing-et használ, legyen írásos jogi elemzése arról, miért nem lépi át a határt."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"HR tech, employee monitoring, and productivity analytics are the highest-risk categories for Art. 5 violations. In DD: map every AI feature against the prohibited list before anything else. One prohibited feature anywhere in the product = immediate shutdown obligation, regardless of the value of the rest of the product."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In SaaS customer agreements: Art. 5 compliance representation and warranty. The vendor warrants that no feature of the system constitutes a prohibited practice under Art. 5. This flows through into M&A reps and warranties. Any discovered Art. 5 violation post-closing triggers a breach of this warranty."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"The grey zone around subliminal manipulation is the biggest unresolved area. Any SaaS client using persuasion-optimising AI, recommendation engines, or dynamic pricing needs a documented legal analysis explaining why it does not meet the Art. 5(1)(a) test — not an assumption. The analysis should address both the subliminal mechanism element and the harm element separately."}
      ]
     }
   ]},
-  {id:4,title:"Nagy kockázat — III. Melléklet és ami benne van",time:"~10 perc",chunks:[
-    {label:"A szektorok",tag:"Miről szól",
-     story:"A III. Melléklet nyolc szektort sorol fel, ahol az AI felhasználás vélelmezetten nagy kockázatú. Ha az ügyfél rendszere ezekben a szektorokban működik, a legsúlyosabb kötelezettségi szinten van — kivéve ha dokumentálni tudják, hogy a rendszer az Art. 6(3) alapján nem jelent jelentős kockázatot. A szektorokat azért választották, mert az AI döntések ezeken a területeken közvetlenül befolyásolják az emberek munkához, hitelhez, oktatáshoz, lakhatáshoz, jogi jogokhoz és közszolgáltatásokhoz való hozzáférését.",
-     players:"A nyolc szektor: biometria, kritikus infrastruktúra, oktatás és szakképzés, foglalkoztatás és munkavállalók kezelése, alapvető magánszolgáltatásokhoz való hozzáférés (hitel, biztosítás), bűnüldözés, migráció és határellenőrzés, igazságszolgáltatás és demokratikus folyamatok.",
-     consequences:"Az Art. 6(3) szűk kibúvót teremt: ha a rendszer Annex III szektorban van, de nem jelent jelentős kockázatot, a szolgáltató önbesorolással minősítheti — de dokumentálni, regisztrálni és az AI Hivatalnak bejelenteni kell. Profilalkotás természetes személyekről MINDIG nagy kockázatú az Annex III-on belül, függetlenül a kockázati érveléstől.",
+  {id:4,title:"High-Risk AI — Annex III and What's In It",time:"~10 min",chunks:[
+    {label:"The Sectors",tag:"Classification",
+     story:"Annex III is the list of eight sectors where AI use is presumed to be high-risk. The classification is not about the technology — it is about the context. The EU chose these eight sectors because AI decisions in these areas directly determine access to fundamental life opportunities: jobs, credit, housing, education, legal rights, and public services. The critical question in every classification analysis is not 'is this an AI system?' but 'does this AI system make or meaningfully influence a decision about a specific natural person in one of these domains?' If the answer is yes, you are presumptively high-risk. If the answer is no — the system only processes aggregate data, provides non-personalised tools, or performs genuinely preparatory tasks that do not feed into individual decisions — then Annex III may not apply.",
+     players:"The eight Annex III sectors: (1) biometrics — identification, categorisation, emotion detection; (2) critical infrastructure — water, energy, transport; (3) education and vocational training — access decisions, assessments; (4) employment and worker management — recruitment, evaluation, promotion, termination; (5) access to essential private services — credit scoring, insurance; (6) law enforcement — risk assessment of individuals; (7) migration and border control; (8) justice and democratic processes. For a SaaS lawyer, sectors 4 and 5 are by far the most common in practice.",
+     consequences:"The Art. 6(3) narrow escape: even if a system is in an Annex III sector, it is NOT high-risk if: (a) it only performs a genuinely preparatory task AND (b) its output does not meaningfully influence a decision about a specific person. If both conditions are met, the provider can self-classify as not high-risk — but must document this. The absolute rule: if the system profiles natural persons within an Annex III sector, there is no Art. 6(3) escape. Profiling is always high-risk within the covered sectors.",
      mapActive:2,
-     question:"Egy SaaS startup AI eszközt értékesít, amely HR menedzsereknek segít álláshirdetéseket írni és piaci adatok alapján bérszinteket javasol. Ez nagy kockázatú az III. Melléklet szerint?",
-     choices:["Igen — minden foglalkoztatást érintő AI automatikusan III. Melléklet nagy kockázatú","Valószínűleg nem — az III. Melléklet §4 személyek értékelésével vagy kiválasztásával foglalkozó AI-t fed le, nem álláshirdetés-írást vagy piaci benchmarking eszközöket","Lehetetlen meghatározni a teljes termék nélkül"],
+     question:"A SaaS startup sells an AI tool that helps HR managers write better job descriptions and suggests salary benchmarks based on market data. Is this high-risk under Annex III?",
+     choices:["Yes — any AI touching employment is automatically Annex III high-risk","Probably not — Annex III §4 covers AI that evaluates or selects specific individuals; a job description writing or salary benchmarking tool that does not evaluate specific people likely falls outside its scope","Impossible to determine without seeing the full product"],
      correct:1,
-     explanation:"B a legjobb válasz. Az III. Melléklet §4 a természetes személyek értékelésére, kiválasztására vagy menedzselésére használt AI-t célozza foglalkoztatási kontextusban. Egy álláshirdetés-készítő vagy bérszint-összehasonlító eszköz, amely nem értékel specifikus egyéneket, nincs a §4 hatályán belül. A kulcskérdés mindig: az AI hoz-e vagy befolyásol-e döntést egy specifikus természetes személyről? Ha nem, az III. Melléklet valószínűleg nem vonatkozik rá.",
-     legal:"III. Melléklet §4: foglalkoztatási AI hatály. Art. 6(3): alacsony kockázatú kibúvó az Annex III szektorokon belül. Art. 6(5): Bizottsági besorolási iránymutatások (tervezet, 2026 május, konzultáció folyamatban).",
+     explanation:"B is the best answer. Annex III §4 targets AI that evaluates, selects, or manages specific natural persons in an employment context. A tool that helps write job ads or compares salary ranges without evaluating specific individuals is not within §4's scope. The key question is always: does the AI make or influence a decision about a specific natural person? If no individual is being evaluated, Annex III §4 is unlikely to apply. Document this analysis in writing.",
+     legal:"Annex III §4: employment AI scope. Art. 6(3): low-risk carve-out within Annex III sectors. Art. 6(5): Commission classification guidelines (May 2026 draft, consultation open).",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Az III. Melléklet hatály kérdés az első szűrő minden AI DD-ben. Térképezz fel minden AI funkciót egy szektorra. Majd kérdezd: értékel, választ ki, vagy befolyásol döntést specifikus természetes személyekről? Ha igen — nagy kockázatú terület, amíg másképp nem bizonyítják."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"SaaS megállapodásokban: a szolgáltatók a tervezett célt elég szűken határozzák meg, hogy ahol lehetséges az Annex III hatályon kívül maradjanak. Homályos cél-meghatározások compliance kötelezettség."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Bizottság besorolási iránymutatások (2026 május tervezet) 2026.06.23-ig nyitott konzultáción. Ha az ügyfél határesetes, az útmutatás megoldhatja a kérdést — szorosan figyeld."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Annex III scope is the first filter in every AI DD. Map each AI function to a sector. Then ask: does this function evaluate, select, or make decisions about specific natural persons? If yes, it is presumptively high-risk until proven otherwise. Require written classification analysis — not a verbal 'we checked and we are fine'."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In SaaS agreements: define the intended purpose narrowly enough that it is clearly either within or outside Annex III scope. Vague purpose definitions such as 'supports HR decisions' create classification ambiguity that triggers compliance obligations the parties did not anticipate."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"The Commission's classification guidelines (May 2026 draft, public consultation until 23 June 2026) are the most important soft law document this year for edge-case classification. If a client has a borderline product, the guidance may resolve the question. Monitor closely and advise clients to comment during the consultation."}
      ]
     }
   ]},
-  {id:5,title:"Szolgáltatói kötelezettségek (Art. 9–15)",time:"~10 perc",chunks:[
-    {label:"Az 5 kötelezettség",tag:"Mit kell csinálni",
-     story:"A megfelelőség-értékelés az AI Act CE-jelölési folyamatának megfelelője fizikai termékekhez. Mielőtt egy nagy kockázatú AI rendszert EU piacra hoznának, a szolgáltatónak dokumentált folyamatot kell lefolytatnia, amely igazolja a rendszer megfelelőségét. A legtöbb Annex III rendszernél ez önértékelés — a szolgáltató dokumentálja saját megfelelőségét. Biometrikus rendszereknél és bűnüldözési AI-nál harmadik fél bejelentett szervezetnek kell értékelnie. A megfelelőség-értékelés nem egyszeri esemény — minden lényeges módosítás esetén megismételendő.",
-     players:"A szolgáltató futtatja a megfelelőség-értékelést és karbantartja a műszaki dokumentációt (IV. Melléklet). A bejelentett szervezet (ahol szükséges) akkreditált harmadik fél. Az AI Hivatal karbantartja az EU adatbázist ahol a szolgáltatóknak regisztrálniuk kell piac előtt. Nemzeti piacfelügyeleti hatóságok auditálhatják a dokumentációt és a rendszert telepítés után.",
-     consequences:"Az 5 fő szolgáltatói kötelezettség nagy kockázatú AI-hoz: (1) kockázatkezelési rendszer — Art. 9, folyamatos és iteratív; (2) adatkormányzás — Art. 10, betanítási adat reprezentatív és hibamentes; (3) műszaki dokumentáció — Art. 11 + IV. Melléklet, piac előtt; (4) naplózás — Art. 12, automatikus eseménynaplózás az életciklus alatt; (5) emberi felügyelet — Art. 14, érdemi beavatkozási képesség. Mind az 5-nek az EU piacra kerülés előtt kell megtörténnie.",
+  {id:5,title:"Provider Obligations (Art. 9–15)",time:"~10 min",chunks:[
+    {label:"The 5 Obligations",tag:"What Must Be Done",
+     story:"Think of the conformity assessment as the AI Act's equivalent of CE marking for physical products. Before any high-risk AI system goes on the EU market, the provider must run a documented process proving that the system meets all applicable requirements. For most Annex III systems, this is self-assessment — the provider builds and signs off the compliance case internally. For biometric identification and law enforcement AI, a third-party accredited notified body must conduct the assessment. The conformity assessment is not a one-time event: every time the provider makes a substantial modification — changing the system's purpose, significantly updating training data, altering how it produces outputs — the assessment must be repeated. This is critically important for SaaS products with continuous model updates: define substantial modification explicitly in your governance framework before you need to rely on that definition. No assessment, no CE mark, no registration = the product is not lawfully on the EU market.",
+     players:"The provider builds and maintains the Annex IV technical documentation and runs the conformity assessment. A notified body (where required) is an accredited third-party assessment organisation. The EU AI Office maintains the database where providers must register high-risk systems before market launch. National market surveillance authorities can audit the documentation at any time post-launch. Deployers do not run conformity assessments — that is exclusively a provider obligation.",
+     consequences:"The five core provider obligations for high-risk AI: (1) <b>Risk management system (Art. 9)</b> — continuous, iterative, documented from design through post-market monitoring; not a one-off document. (2) <b>Data governance (Art. 10)</b> — training data must be representative, relevant, and appropriate for the intended purpose. (3) <b>Technical documentation (Art. 11 + Annex IV)</b> — 9 mandatory elements, created before market launch, kept for 10 years. (4) <b>Logging (Art. 12)</b> — the system must automatically generate logs enabling post-hoc review of its operation. (5) <b>Human oversight (Art. 14)</b> — a designated natural person must be able to understand, monitor, override, and stop the system.",
      mapActive:2,
-     question:"Egy SaaS fintech cég saját hitelpontozó ML modellt tréningez és API-ként értékesíti bankoknak. Mielőtt EU ügyfeleknek ajánlhatják, mit kell elvégezniük?",
-     choices:["Regisztrálni az EU adatbázisban és harmadik fél bejelentett szervezettől conformity tanúsítványt szerezni","Önértékelési megfelelőség-értékelést elvégezni, IV. Melléklet műszaki dokumentációt elkészíteni, és EU adatbázisban regisztrálni","Értesíteni a nemzeti felügyeleti hatóságot és jóváhagyásra várni piac előtt"],
+     question:"A SaaS fintech company trains its own credit scoring ML model and sells it as an API to banks across the EU. What must they complete before offering it to EU customers?",
+     choices:["Register in the EU database and obtain a conformity certificate from a third-party notified body","Complete a self-assessment conformity assessment, produce Annex IV technical documentation, and register in the EU database","Notify the national supervisory authority and wait for approval before market launch"],
      correct:1,
-     explanation:"B helyes. A hitelpontozás az III. Melléklet §5 alá esik — nagy kockázatú, de nem abban az alkategóriában amelyik kötelező harmadik fél értékelést ír elő (az a biometrika és bűnüldözés számára van fenntartva). A szolgáltató önértékeli, IV. Melléklet szerint elkészíti a dokumentációt, és EU adatbázisban regisztrál piac előtt. Nincs hatósági előzetes jóváhagyás — de hatóságok bármikor auditálhatnak.",
-     legal:"Art. 9: kockázatkezelési rendszer. Art. 10: adatkormányzás. Art. 11 + IV. Melléklet: műszaki dokumentáció. Art. 12: naplózás. Art. 14: emberi felügyelet. Art. 43: megfelelőség-értékelési útvonalak. Art. 49: regisztráció.",
+     explanation:"B is correct. Credit scoring falls under Annex III §5 — high-risk, but not in the subcategory requiring mandatory third-party assessment (that is reserved for biometrics and law enforcement). The provider self-assesses, produces Annex IV documentation, and registers in the EU database before launch. There is no prior regulatory approval required — but authorities can audit at any time post-launch.",
+     legal:"Art. 9: risk management system. Art. 10: data governance. Art. 11 + Annex IV: technical documentation. Art. 12: logging. Art. 14: human oversight. Art. 43: conformity assessment routes. Art. 49: registration.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"IV. Melléklet dokumentációt kérj DD-be. Ha nem létezik vagy a launch után írták, retroaktív compliance gap van — reps and warranties kockázat."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"Ügyfélmegállapodásokban ahol az ügyfél a szolgáltató: szavatolja hogy a megfelelőség-értékelés és műszaki dokumentáció teljes és naprakész. Frissítési kötelezettség lényeges módosítás esetén."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"A kockázatkezelési rendszernek folyamatosnak kell lennie — nem egyszeri dokumentum. Tanácsold az ügyfeleknek hogy az első naptól a termékfejlesztési folyamat részévé tegyék, ne compliance utógondolatként."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Request the Annex IV technical documentation in every AI DD. Check the creation date — it must predate market launch. If it does not exist or was clearly written retroactively, you have a retroactive compliance gap: representations and warranties risk in M&A, and an active market access problem."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In client agreements where the client is the provider: warrant that conformity assessment and technical documentation are complete, current, and updated on every substantial modification. The update obligation is ongoing — not a one-time delivery at contract signing."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"The risk management system must be continuous — not a document filed once and forgotten. Advise clients to integrate it into their product development cycle from day one: risk assessments at each major release, documented data governance decisions, and a defined process for determining whether a model update constitutes a substantial modification."}
      ]
     }
   ]},
-  {id:6,title:"Alkalmazói kötelezettségek (Art. 26)",time:"~10 perc",chunks:[
-    {label:"Mit kell tennie az alkalmazónak",tag:"Az ügyfél mint felhasználó",
-     story:"Ha a SaaS ügyfél harmadik fél AI rendszert használ — HR eszközt, ügyfélszolgálati botot, hitelelbíráló motort — nem pedig épít egyet, alkalmazó. Az alkalmazói kötelezettségek könnyebbek a szolgáltatóinál, de valósak és azonnal alkalmazandók nagy kockázatú rendszereknél. Az Art. 26 hat speciális kötelezettséget rögzít. A legfontosabb üzleti szempontból az emberi felügyelet: ki kell jelölni egy valódi személyt aki jogosult felügyelni a rendszer outputját és beavatkozni vagy leállítani.",
-     players:"Az alkalmazó bármely természetes vagy jogi személy aki saját hatáskörben nagy kockázatú AI rendszert használ. Ez magában foglalja: AI vendor eszközöket saját termékükbe integráló cégeket, AI-t HR folyamatokban alkalmazó munkáltatókat, hitelpontozási API-t használó pénzintézeteket. Az alkalmazó elsődleges hatósága az illetékes tagállami hatóság — Magyarországon MI Piacfelügyeleti Főosztály.",
-     consequences:"A hat Art. 26 alkalmazói kötelezettség: (1) tervezett célon belüli használat; (2) emberi felügyelet kijelölése — beavatkozási jogosultsággal; (3) kezelők szükséges kompetenciájának biztosítása; (4) output kockázatmonitorozása; (5) súlyos incidensek jelzése a szolgáltatónak és hatóságnak; (6) munkavállalói képviselők értesítése munkavállalókat érintő AI telepítés előtt.",
+  {id:6,title:"Deployer Obligations (Art. 26)",time:"~10 min",chunks:[
+    {label:"The Deployer's Duties",tag:"The Client as User",
+     story:"If your SaaS client is not building an AI product but using one — a third-party HR tool, a customer service bot, a credit scoring API — they are a deployer. Deployer obligations are lighter than provider obligations but are real, immediate, and apply from the moment the high-risk system is switched on. The most commercially significant is human oversight designation: before deploying any high-risk AI system, the deployer must designate a specific named person with the actual technical ability to monitor the system's outputs and intervene or stop it if needed. This cannot be nominal — 'the COO is technically responsible' without operational capability is not compliance. The designated person must understand the system well enough to recognise when outputs are unreliable or harmful, and must have the authority and the means to act.",
+     players:"Any natural or legal person using a high-risk AI system under its own authority in a professional context is a deployer. This covers: companies integrating vendor AI tools into their own products; employers using AI in HR processes; financial institutions using AI credit scoring APIs. The deployer's primary regulator is the competent national market surveillance authority — in Hungary, the AI Market Surveillance Department under the Ministry of Economy and Energy.",
+     consequences:"The six Art. 26 deployer obligations: (1) use within the intended purpose defined by the provider; (2) designate a human oversight person with real intervention capability; (3) ensure operators have the necessary competence and training; (4) monitor the system's risk during operation; (5) report serious incidents to the provider and the national authority within applicable deadlines; (6) notify workers' representatives before deploying AI that affects employees. The worker notification requirement under Art. 26(7) is likely to be the first enforcement target in employment contexts — it is concrete, verifiable, and connects to existing labour law frameworks.",
      mapActive:3,
-     question:"Egy magyar munkáltató bekapcsolja Workpath AI-alapú ATS-ét felvételhez. Az Art. 26 szerint mi a legfontosabb kötelezettségük a rendszer bekapcsolása előtt?",
-     choices:["Alapjogi hatásvizsgálat (FRIA) elvégzése","Névvel megjelölt személy kijelölése aki jogosult figyelni és felülbírálni az AI döntéseit","A telepítés regisztrálása az EU adatbázisban"],
+     question:"A Hungarian employer activates Workpath's AI-powered ATS for a new hiring cycle. Under Art. 26, what is their most universally required obligation before switching the system on?",
+     choices:["Complete a Fundamental Rights Impact Assessment (FRIA)","Designate a named person with the actual ability to monitor and override the AI's outputs","Register the deployment in the EU database"],
      correct:1,
-     explanation:"B a legegyetemesebben megkövetelt Art. 26 kötelezettség minden nagy kockázatú AI alkalmazójának. A FRIA (A választás) szintén fontos de specifikusan közintézményekre és bizonyos magánszereplőkre vonatkozik — nem általános. Az EU adatbázis regisztráció alkalmazóknak csak specifikus körülmények között kötelező. Az emberi felügyelet kijelölése az alapkötelezettség minden nagy kockázatú rendszer minden alkalmazójának.",
-     legal:"Art. 26(1)–(7): alkalmazói kötelezettségek. Art. 26(2): emberi felügyelet kijelölése. Art. 26(5): incidens jelzés. Art. 26(7): munkavállalói tájékoztatási kötelezettség. Art. 27: FRIA kötelezettség hatálya.",
+     explanation:"B is the universally required Art. 26 obligation for all deployers of high-risk AI. The FRIA (option A) is also important but applies specifically to public bodies and certain private actors — not universally. EU database registration for deployers is required only in specific circumstances. Human oversight designation is the baseline obligation for every deployer of every high-risk system, and it must exist before the system is switched on.",
+     legal:"Art. 26(1)–(7): deployer obligations. Art. 26(2): human oversight designation. Art. 26(5): incident reporting. Art. 26(7): worker notification obligation. Art. 27: FRIA scope.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"AI eszközöket használó cég DD-jében: kérdezd meg jelöltek-e Art. 26(2) felügyeleti személyek minden nagy kockázatú rendszerhez. Nincs kijelölés = azonnali compliance gap."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"Workpath (szolgáltató) és munkáltató (alkalmazó) közötti SaaS megállapodásban: a szolgáltatónak Art. 13 használati utasítást kell szállítania, beleértve az Art. 26 kötelezettségek teljesítéséhez szükséges információkat. Tedd ezt szállítandóvá, ne utógondolattá."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Az Art. 26(7) munkavállalói tájékoztatási kötelezettség valószínűleg az első végrehajtási célpont — konkrét, dokumentálható és kapcsolódik a meglévő munkajogi keretekhez. Tanácsold az üzemi tanács értesítését minden, munkavállalókat érintő AI telepítés előtt."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"In DD of a company that uses AI tools: ask specifically whether Art. 26(2) oversight persons are designated for each high-risk system, by name. No designation = immediate compliance gap. Also ask about Art. 26(7): was workers' council notified before deployment of each AI system affecting employees?"},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In the Workpath (provider) / employer (deployer) SaaS agreement: Workpath must deliver an Art. 13 instructions for use document enabling the employer to fulfil its Art. 26 obligations — including human oversight parameters, technical specifications for monitoring, and incident reporting procedures. Make this a named deliverable, not an afterthought."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"Art. 26(7) worker notification is likely the first high-profile enforcement target for employment AI. It is concrete, connects to existing works council frameworks, and trade unions will push regulators to enforce it. Advise clients using AI in HR to notify their workers' representatives before deployment — even retroactively for already-live systems."}
      ]
     }
   ]},
-  {id:7,title:"GPAI modellek a termékedben",time:"~10 perc",chunks:[
-    {label:"A GPAI réteg",tag:"OpenAI, Anthropic, Google",
-     story:"Általános célú AI modellek — GPT-4, Claude, Gemini — külön szabályozási rétegben vannak a Title VIII alatt, függetlenül az AI rendszer kockázati piramisától. Minden GPAI providernek alap kötelezettségei vannak kockázati szinttől függetlenül: műszaki dokumentáció, betanítási adatok összefoglalója (szerzői jogi megfeleléshez), és együttműködés az AI Hivatallal. A 10²⁵ FLOP betanítási számítási küszöb feletti modellek plusz szisztematikus kockázati kötelezettségekkel szembesülnek. SaaS ügyfeleid számára a GPAI szabályozás elsősorban vendor menedzsment és szerződéses kérdés.",
-     players:"GPAI providerek (OpenAI, Anthropic, Google, Mistral) szabályozása az AI Hivatal hatásköre — nem nemzeti hatóságoké. A GPAI Magatartási Kódex (2025 július) önkéntes de gyakorlatilag kötelező. Nyílt forrású GPAI modellek csökkentett kötelezettségekkel rendelkeznek de nem mentesülnek teljesen.",
-     consequences:"SaaS ügyfelek számára GPAI API-kat használva: a GPAI providerrel kötött szerződésnek biztosítania kell a saját kötelezettségeik teljesítéséhez szükséges információkat downstream szolgáltatóként. Art. 25(2) ezt a GPAI providerre hárítja. A gyakorlati kockázat: a legtöbb standard GPAI API feltétel még nem kezeli teljes mértékben ezeket a kötelezettségeket.",
+  {id:7,title:"GPAI Models in Your Product",time:"~10 min",chunks:[
+    {label:"The GPAI Layer",tag:"OpenAI · Anthropic · Google",
+     story:"General Purpose AI models — GPT-4, Claude, Gemini, Mistral — exist in a separate regulatory layer under Title VIII, sitting alongside the main risk pyramid rather than within it. Every GPAI provider has baseline obligations regardless of what downstream products are built on their model: technical documentation, training data summary for copyright compliance, and cooperation with the EU AI Office. Models trained with more than 10 to the power of 25 FLOPs face additional systemic risk obligations: adversarial testing, incident reporting to the AI Office, cybersecurity measures, and energy reporting. For your SaaS clients, the GPAI framework matters primarily as a vendor management and contract negotiation question. The core issue: when your client builds a high-risk AI system using a GPAI API, they need specific technical information from the GPAI provider to complete their own conformity assessment — and that information is not in the standard API terms.",
+     players:"GPAI providers (OpenAI, Anthropic, Google, Mistral, Meta with Llama) are regulated by the EU AI Office — not national authorities. The GPAI Code of Practice (July 2025) is technically voluntary but functionally mandatory as compliance evidence. Open-source GPAI models with publicly available weights have reduced obligations — but SRMI rules apply to open-source models above the FLOP threshold regardless of licence.",
+     consequences:"Art. 25(2) gives downstream providers the right to request Annex XII technical documentation from the GPAI provider — the training methodology summary, performance characteristics, and technical specifications needed to complete their own high-risk system conformity assessment. This right exists in the regulation. It does NOT automatically appear in standard API terms. As of May 2026, most GPAI provider standard terms do not fully address it. If your client's product is high-risk and built on a GPAI API, they need a bespoke vendor addendum securing this right before they can lawfully complete their conformity assessment.",
      mapActive:2,
-     question:"Egy SaaS startup OpenAI GPT-4 API-t használ EU bankoknak szóló hitelkockázat-értékelő eszköz építéséhez. Milyen kötelezettsége van OpenAI-nak a startup felé az AI Act alapján?",
-     choices:["Semmi — OpenAI GPAI kötelezettségei csak az AI Hivatal felé állnak fenn, nem downstream ügyfelek felé","OpenAI köteles az Annex XII műszaki dokumentációt szállítani, amelyre a startupnak saját nagy kockázatú rendszer szolgáltatói kötelezettségeinek teljesítéséhez van szüksége","OpenAI köteles conformity assessment-et futtatni a startup nevében az eszköz telepítése előtt"],
+     question:"A SaaS startup uses the OpenAI GPT-4 API to build a credit risk assessment tool for EU banks. Under the AI Act, what obligation does OpenAI have toward the startup?",
+     choices:["None — OpenAI's GPAI obligations run only to the EU AI Office, not to downstream customers","OpenAI must make available the Annex XII technical documentation that the startup needs to complete its own high-risk AI system provider obligations","OpenAI must run the conformity assessment on the startup's behalf before the tool is deployed"],
      correct:1,
-     explanation:"B helyes. Az Art. 25(2) megköveteli a GPAI providerektől hogy együttműködjenek a modellüket nagy kockázatú AI rendszerekbe integráló downstream providerekkel, beleértve a szükséges technikai információ szállítását (Annex XII). A startup nem tudja elvégezni saját conformity assessment-jét e dokumentáció nélkül OpenAI-tól. Ez szerződéstárgyalási kérdés — nem történik meg automatikusan.",
-     legal:"Art. 51–56: GPAI rezsim. Art. 25(2): GPAI provider kötelezettsége downstream providerekkel. XII. Melléklet: GPAI műszaki dokumentáció. GPAI Magatartási Kódex (2025 július).",
+     explanation:"B is correct. Art. 25(2) requires GPAI providers to cooperate with downstream providers integrating their models into high-risk AI systems, including making available the technical information necessary for compliance (Annex XII). The startup cannot complete its own conformity assessment without this information from OpenAI. This right is in the regulation — but it does not automatically appear in standard API terms. It requires a negotiated contract addendum.",
+     legal:"Art. 51–56: GPAI regime. Art. 25(2): GPAI provider obligation toward downstream providers. Annex XII: GPAI technical documentation. GPAI Code of Practice (July 2025).",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"GPAI API-kat használó SaaS cég DD-jében: ellenőrizd hogy a vendor megállapodásuk tartalmaz-e Art. 25(2) dokumentációs jogokat. A legtöbb standard API feltétel nem tartalmazza. Hiányzó = compliance gap amelyet a target esetleg nem azonosított."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"GPAI vendorral tárgyalásban: explicit Art. 25(2) dokumentáció szállítási kötelezettség, XII. Melléklet szállítandó, értesítés a megfelelőséget érintő modell változásokról, és auditálási jog a GPAI kötelezettségek betartásának ellenőrzésére."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Tanácsold az ügyfeleket GPAI API megállapodás aláírása előtt: a standard feltételek nem AI Act kompatibilisek nagy kockázatú felhasználási esetekre. Bespoke addendumok szükségesek. Ez tárgyalási pont, nem vedd-vagy-hagyd."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"In DD of a SaaS company using GPAI APIs for high-risk use cases: check whether their vendor agreements contain Art. 25(2) documentation rights. Most standard API terms do not. Absence = compliance gap the target may not have identified — they cannot complete their conformity assessment without it."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In GPAI vendor contract negotiations: secure explicitly: (a) Art. 25(2) right to receive Annex XII documentation on request; (b) obligation to notify of model updates that affect compliance; (c) audit right for GPAI-level compliance; (d) liability allocation for GPAI-level compliance failures. These are non-standard and must be negotiated."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"Advise clients before signing any GPAI API agreement for a high-risk use case: standard terms are not AI Act compliant for high-risk downstream products. A bespoke addendum is required. OpenAI and Anthropic have enterprise agreement processes where this can be addressed. Frame it as a legal compliance requirement, not a commercial ask."}
      ]
     }
   ]},
-  {id:8,title:"Due diligence — az AI Act red flag lista",time:"~10 perc",chunks:[
-    {label:"A DD keretrendszer",tag:"Az első felhasználási eset",
-     story:"Az AI Act DD-nek három rétege van. Az első a tiltott gyakorlatok vizsgálata — tárgyalhatatlan, mindenekelőtt el kell végezni. A második a nagy kockázatú besorolás feltérképezése — azonosítsd melyik AI rendszerük van, osztályozd mindegyiket az III. Melléklet alapján, és ellenőrizd hogy a dokumentáció megvan-e. A harmadik a vendor megállapodás átvizsgálása — itt van a legtöbb SaaS targetnek a legnagyobb hiányossága.",
-     players:"VC vagy M&A tranzakcióban az AI Act compliance DD csapatnak tartalmaznia kell: jogi tanácsadót (besorolás, kötelezettségek feltérképezése), technikai tanácsadót vagy CTO átvizsgálást (rendszer architektúra, adatfolyamok), és HR/munkajogi tanácsadót ha a targetnek munkavállalókat érintő AI-ja van.",
-     consequences:"Leggyakoribb hiányosságok SaaS target DD-ben: (1) nincs IV. Melléklet műszaki dokumentáció nagy kockázatú rendszer üzemeltetése ellenére; (2) vendor megállapodások nem tartalmazzák Art. 25(2) dokumentációs jogokat GPAI providerektől; (3) nincs írásos besorolási döntés nem-nagy-kockázatú önbesorolású rendszerekre; (4) nincs kijelölt Art. 26(2) emberi felügyeleti személy telepített nagy kockázatú eszközökhöz; (5) nincs Art. 4 AI irodalmi bizonyíték az AI rendszereket használó személyzetnél.",
+  {id:8,title:"Due Diligence — The AI Act Red Flag List",time:"~10 min",chunks:[
+    {label:"The DD Framework",tag:"Primary Use Case",
+     story:"AI Act due diligence has three layers that must be run in sequence. Layer one is the prohibited practices scan — non-negotiable, done first, before anything else. If a target has an Art. 5 violation, it is an existential product risk, not a compliance fine, and the rest of the DD is secondary. Layer two is high-risk classification mapping — identify every AI function in the product, classify each against Annex III, and verify that documentation exists where required. This is where most SaaS targets have gaps, because many have not done a formal written classification analysis. Layer three is the vendor agreement audit — this is where the largest gap typically sits. Most pre-2025 vendor agreements do not address AI Act obligations at all: no Art. 25(2) documentation rights, no liability for GPAI-level compliance failures, no notification of model updates affecting compliance.",
+     players:"In a VC or M&A transaction, the AI Act compliance DD team should include: legal counsel (classification analysis, obligation mapping, contract review), a technical advisor or CTO review (system architecture, data flows, model update frequency), and employment/labour counsel if the target has AI systems affecting workers. The AI Act is not a purely legal question — the technical architecture of the system determines its classification, and understanding that architecture requires non-legal expertise.",
+     consequences:"The five most common compliance gaps in SaaS target DD: (1) no Annex IV technical documentation despite operating a high-risk system; (2) vendor agreements missing Art. 25(2) documentation rights from GPAI providers; (3) no written classification decision for systems self-classified as not-high-risk; (4) no designated Art. 26(2) human oversight person for deployed high-risk tools; (5) no Art. 4 AI literacy evidence for staff operating AI systems. Each is individually addressable — but together they indicate a systematic compliance programme absence, which has a different M&A risk profile than individual gaps.",
      mapActive:3,
-     question:"SaaS fintech target DD-je során kiderül hogy külső AI hitelpontozási API-t használnak (III. Melléklet §5). Vendor szerződésük az AI Act előttről való és nincs benne AI Act rendelkezés. Mi a legjelentősebb jogi hiányosság?",
-     choices:["A targetnek nincs kártérítési fedezete ha a vendor AI rendszere veszteséget okoz — standard szerződéses felelősségi gap","A target nem tudja igazolni hogy megkapta az Art. 25(2) műszaki dokumentációt saját alkalmazói kötelezettségei teljesítéséhez, és a vendornak nincs szerződéses kötelezettsége azt szállítani","A szerződés nem felel meg az AI Act kompatibilis megállapodás előírt formai követelményeinek"],
+     question:"During DD of a SaaS fintech target, you discover they use an external AI credit scoring API (Annex III §5). Their vendor contract predates the AI Act and contains no AI Act provisions. What is the most significant legal gap?",
+     choices:["The target has no indemnity coverage if the vendor's AI system causes losses — standard contractual liability gap","The target cannot demonstrate it received the Art. 25(2) technical documentation needed to fulfil its own deployer obligations, and the vendor has no contractual obligation to provide it","The contract does not comply with the required formal requirements for an AI Act-compliant agreement"],
      correct:1,
-     explanation:"B helyes. Art. 25(2) dokumentáció nélkül a target nem tudja igazolni hogy rendelkezik az Art. 26 alkalmazói kötelezettségeik teljesítéséhez szükséges információval — használati utasítás, emberi felügyeleti paraméterek, naplózási specifikációk. A vendornak nincs szerződéses kötelezettsége ezt szállítani. Ez M&A-ban reps and warranties kockázat és lehetséges kötelezettség-átvállalás.",
-     legal:"Art. 25(2): GPAI/nagy kockázatú rendszer provider kötelezettsége downstream alkalmazókkal. Art. 26: alkalmazói kötelezettségek. Art. 13: használati utasítás szükségessége. Art. 43–49: megfelelőség-értékelési és regisztrációs kötelezettségek.",
+     explanation:"B is correct. Without Art. 25(2) documentation, the target cannot demonstrate it has the information required to fulfil its Art. 26 deployer obligations — instructions for use, human oversight parameters, logging specifications. The vendor has no contractual obligation to provide this. In M&A, this is a representations and warranties risk and a potential liability transferred to the acquirer.",
+     legal:"Art. 25(2): GPAI/high-risk system provider obligation toward downstream deployers. Art. 26: deployer obligations. Art. 13: instructions for use requirement. Art. 43–49: conformity assessment and registration obligations.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"7 pontos AI Act DD ellenőrzőlista: (1) besorolási döntés dokumentálva? (2) QMS megvan? (3) Műszaki dok. IV. Melléklet szerint? (4) Conformity assessment elvégezve? (5) GPAI API dokumentáció (Art. 25(2))? (6) EU adatbázis regisztráció? (7) Bejelentett súlyos incidens? 3+ NEM = material gap."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"M&A SPA-ban: AI Act compliance reps. Az eladó szavatolja hogy minden AI rendszer megfelelően besorolt, dokumentált, értékelt és regisztrált. Hiányos reps = zárás előtti remediation vagy vételár-kiigazítás trigger."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"A vendor megállapodás felülvizsgálat a legmagasabb ROI AI Act activity ügyvédi szempontból. Egy ügyfél egész AI stack-je egy délután feltérképezhető és a szerződéses hiányosságok azonosíthatók — mielőtt egy hatóság megcsinálja helyetted."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"7-point AI Act DD checklist: (1) classification decision documented? (2) QMS exists in writing? (3) Annex IV technical documentation complete and pre-dated launch? (4) conformity assessment completed? (5) GPAI API contracts include Art. 25(2) rights? (6) EU database registration? (7) serious incidents reported or unreported? Three or more NOs = material gap requiring pricing, escrow, or closing condition."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"Standard SPA AI Act reps (2026 market practice): seller warrants that (1) all AI systems are classified and documented; (2) all high-risk systems have completed conformity assessment and are registered; (3) no prohibited practices exist; (4) GPAI vendor agreements include Art. 25(2) rights; (5) no serious incidents have been reported or should have been reported but were not."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"Vendor agreement audit is the highest ROI AI Act activity from a legal advisory perspective. A client's entire AI stack can be mapped in an afternoon, and the contractual gaps identified before a regulator finds them. The Art. 25(2) rights gap is the most commonly missing, most impactful, and most negotiable of the gaps found."}
      ]
     }
   ]},
-  {id:9,title:"GDPR találkozik az AI Act-tel",time:"~10 perc",chunks:[
-    {label:"A két rendszer",tag:"Párhuzamos kötelezettségek",
-     story:"Az AI Act és a GDPR egymás mellett él — nem helyettesítik egymást és nincs általános elsőbbségi szabály. Egy nagy kockázatú AI rendszer amely személyes adatokat dolgoz fel egyszerre Art. 9 kockázatkezelési rendszert és GDPR Art. 35 DPIA-t igényel. Ezek hasonlóak de nem azonosak: a DPIA az adatkezelési kockázatokra fókuszál, az AI Act kockázatkezelési rendszer az AI rendszer egész életciklusára. A FRIA (AI Act Art. 26(9)) az alkalmazói hatásvizsgálat amely az alapjogokra fókuszál — tágabb a DPIA-nál.",
-     players:"A NAIH (Nemzeti Adatvédelmi és Információszabadság Hatóság) a magyar GDPR felügyeleti hatóság. Az MI Piacfelügyeleti Főosztály a magyar AI Act hatóság. Ezek különálló hatóságok különálló vizsgálati hatáskörökkel — bár adatvédelmi incidensek esetén az értesítési kötelezettségek egybeeshetnek.",
-     consequences:"Három fő ütközési pont: (1) Art. 22 GDPR (automatizált döntéshozatal) vs. Art. 14 AI Act (emberi felügyelet) — mindkettő vonatkozik ha az AI befolyásolja az egyének jogi státuszát; (2) DPIA vs. FRIA — esetleg párhuzamosan kell elvégezni; (3) adatminimalizálás (GDPR) vs. reprezentatív betanítási adat (AI Act Art. 10) — néha feszültség.",
+  {id:9,title:"Where GDPR Meets the AI Act",time:"~10 min",chunks:[
+    {label:"Two Frameworks",tag:"Parallel Obligations",
+     story:"The AI Act and the GDPR coexist — they do not replace each other and there is no general priority rule between them. A high-risk AI system that processes personal data triggers both frameworks simultaneously: it needs an Art. 9 risk management system (AI Act) AND a GDPR Art. 35 Data Protection Impact Assessment (DPIA). These are similar but not identical instruments. The DPIA focuses on data processing risks — is the data lawfully processed, is there a legal basis, are data subject rights protected? The AI Act risk management system focuses on the AI system's entire lifecycle — are the training data appropriate, does the system produce reliable outputs, are there biases, can a human intervene? A system can have a perfectly adequate DPIA and a completely absent AI Act risk management system. The FRIA (Fundamental Rights Impact Assessment, Art. 26(9)) is the deployer's impact assessment — broader than DPIA, covering not just data protection but discrimination, human dignity, due process, and access to remedies. High-risk AI systems processing personal data require three documents — DPIA, FRIA, and AI Act risk management system — and none of these substitutes for the others.",
+     players:"In Hungary: the NAIH (Nemzeti Adatvédelmi és Információszabadság Hatóság) is the GDPR supervisory authority. The AI Market Surveillance Department (Ministry of Economy and Energy) is the AI Act authority. These are separate institutions with separate investigation powers. A data breach from an AI system could trigger parallel notifications to both. Dual notification is the safe approach as of May 2026.",
+     consequences:"Three key collision points: (1) <b>GDPR Art. 22 vs AI Act Art. 14:</b> GDPR Art. 22 gives data subjects the right not to be subject to solely automated decisions with significant effects. AI Act Art. 14 requires meaningful human oversight capability for all high-risk systems. Both apply if the AI influences individual legal status — but they operate differently. Compliance with one does not ensure compliance with the other. (2) <b>Data minimisation (GDPR) vs representative training data (AI Act Art. 10):</b> GDPR says collect as little data as possible; AI Act says training data must be representative and comprehensive. These can create tension in system design. (3) <b>DPIA vs FRIA:</b> Different scope, different assessor, possibly different timing — and both may be required for the same system.",
      mapActive:4,
-     question:"Egy SaaS cég AI-alapú hitelpontozó eszközt telepít. Mind a GDPR mind az AI Act vonatkozik. Melyik állítás igaz ezek együttes alkalmazásáról?",
-     choices:["Az AI Act a GDPR-t felváltja AI rendszereket érintő adatkezelésekre — csak az AI Act compliance szükséges","Mindkét keretrendszer egyszerre vonatkozik — DPIA (GDPR) és kockázatkezelési rendszer (AI Act) külön szükséges, mert különböző kockázatokat fednek","A GDPR Art. 22 helyettesíti az AI Act Art. 14 emberi felügyelet követelményét automatizált döntéshozatalra"],
+     question:"A SaaS company deploys an AI-based credit scoring tool. Both GDPR and the AI Act apply. Which statement is accurate about how they interact?",
+     choices:["The AI Act displaces GDPR for data processing by AI systems — only AI Act compliance is required","Both frameworks apply simultaneously — a DPIA (GDPR) and an AI Act risk management system are separately required because they address different risks","GDPR Art. 22 substitutes for AI Act Art. 14 human oversight requirements for automated decision-making"],
      correct:1,
-     explanation:"B helyes. Az AI Act 2. cikke kimondja hogy nem érinti a GDPR alkalmazását. Mindkét keretrendszer egyszerre vonatkozik a személyes adatokat feldolgozó AI rendszerekre. A DPIA az adatkezelési kockázatokra fókuszál, az AI Act kockázatkezelési rendszer az AI rendszer egész életciklusát fedi. A FRIA tágabb hatásvizsgálat amely az alapjogokat veszi figyelembe, a DPIA-n túlmenően.",
-     legal:"GDPR Art. 22: automatizált egyéni döntéshozatal. GDPR Art. 35: adatvédelmi hatásvizsgálat (DPIA). AI Act Art. 2(7): AI Act nem érinti a GDPR alkalmazását. AI Act Art. 9: kockázatkezelési rendszer. AI Act Art. 10: adatkormányzás. AI Act Art. 26(9): FRIA.",
+     explanation:"B is correct. AI Act Art. 2(7) states explicitly that the Act does not affect the application of GDPR. Both frameworks apply simultaneously to AI systems processing personal data. The DPIA and the AI Act risk management system are separate instruments addressing different risks. The FRIA is a third separate assessment covering fundamental rights impact. Doing one does not substitute for the others.",
+     legal:"GDPR Art. 22: automated individual decision-making. GDPR Art. 35: DPIA. AI Act Art. 2(7): AI Act does not affect GDPR. AI Act Art. 9: risk management system. AI Act Art. 10: data governance. AI Act Art. 26(9): FRIA.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Személyes adatokat feldolgozó AI rendszernél: ellenőrizd a DPIA-t ÉS az AI Act dokumentációt egymástól függetlenül. A legtöbb cég ha az egyiket elvégezte feltételezi hogy a másik lefedett — nem az."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"Adatfeldolgozói megállapodásokban ahol az AI feldolgozást végez: adj hozzá AI Act specifikus rendelkezést. A standard DPA sablon általában nem fed le AI Act kötelezettségeket — különálló AI Act addendum szükséges."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Tanácsold az ügyfeleket hogy a FRIA-t ne a DPIA egyszerű kiterjesztéseként kezeljék. A FRIA az alapjogi hatást vizsgálja — szélesebb mint az adatvédelem, magában foglalja a diszkriminációt, az emberi méltóságot és a peres eljáráshoz való jogot."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"For AI systems processing personal data: check the DPIA and the AI Act documentation independently. Most companies who have done one assume the other is covered — it is not. Ask for both documents separately and check that the AI Act risk management system addresses model-specific risks beyond what the DPIA covers."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"In data processing agreements where the AI performs processing: add an AI Act-specific addendum. Standard DPA templates do not cover AI Act obligations — they address lawful basis, data subject rights, and security measures, but not technical documentation, human oversight parameters, or AI Act incident reporting timelines."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"Advise clients not to treat the FRIA as a DPIA extension. The FRIA covers discrimination, human dignity, access to justice, and democratic participation — well beyond data protection. For high-risk AI in employment, credit, or public services, the FRIA should be conducted with a fundamental rights lens, involving HR, legal, and compliance jointly — not just the privacy team."}
      ]
     }
   ]},
-  {id:10,title:"A teljes kép",time:"~10 perc",chunks:[
-    {label:"Az ökoszisztéma",tag:"Szintézis",
-     story:"Az AI Act nem egyetlen kötelezettség — egy ökoszisztéma amely lefedi a piacra lépést, az üzemeltetést, a változtatásokat és a kilépést. Egy SaaS cég számára aki ma piacra megy, a legfontosabb azonnali kérdések: (1) tiltott-e bármely funkciójuk? (2) nagy kockázatú-e a rendszerük és van-e conformity assessment-jük? (3) a GPAI API megállapodásaik tartalmazzák-e az Art. 25(2) jogokat? A 2027 decemberi határidő lehetőséget ad, de az M&A tranzakciókban a compliance állapot azonnali kérdés.",
-     players:"Az EU szabályozói ökoszisztéma: az AI Hivatal (GPAI és szisztematikus kockázat), az AI Testület (nemzeti hatóságok koordinációja), a nemzeti piacfelügyeleti hatóságok (nem-GPAI végrehajtás), a NAIH (adatvédelmi metszéspontok). Magyar cégeknek: MI Piacfelügyeleti Főosztály az elsődleges érintkezési pont — elérhetőségük 2026 közepén még véglegesítés alatt áll.",
-     consequences:"Az M&A felelősségi kérdés: ha a target olyan AI rendszert értékesít ami utólag nem-megfelelőnek bizonyul, az acquirer átveszi azt a felelősséget. Nem csak bírság — hanem működési kockázat is (rendszer leállítása előírható), reputációs kockázat, és ügyfél szerződési szankciók. Ezért az AI Act compliance reps ma a standard SPA tartalom.",
+  {id:10,title:"The Full Picture",time:"~10 min",chunks:[
+    {label:"The Ecosystem",tag:"Synthesis",
+     story:"The AI Act is not a single obligation — it is a compliance ecosystem covering market entry, operation, modification, and exit. For a SaaS company going to market today, the most important immediate questions are: (1) does any feature trigger an Art. 5 prohibition — if yes, it must stop now; (2) is the system high-risk and does a conformity assessment exist — if not, it is not lawfully on the market; (3) do the GPAI API vendor agreements contain Art. 25(2) documentation rights — if not, the conformity assessment may be impossible to complete. The December 2027 deadline for standalone high-risk systems provides a runway, but M&A transactions happen now — and in every transaction, the AI Act compliance state of the target is an immediate question, not a future one. An acquirer who closes on a target with an active Art. 5 violation, a missing conformity assessment, or an Art. 25(2) documentation gap inherits that liability on day one.",
+     players:"The EU regulatory ecosystem: the EU AI Office (supervises GPAI models and systemic risk, within the Commission), the AI Board (coordinates national authorities), national market surveillance authorities (enforce non-GPAI obligations), and the NAIH (data protection intersection). For Hungarian companies: the AI Market Surveillance Department is the primary contact point — their operational procedures were still being finalised in mid-2026. The AI Omnibus (May 2026) is amending specific procedural aspects of the Act — verify final text before advising on timelines.",
+     consequences:"The M&A liability question is more complex than it appears. When an acquirer buys a SaaS company with a non-compliant AI system, it inherits: (a) the financial risk of fines; (b) the operational risk of mandatory system withdrawal; (c) customer contractual risk — if customer agreements contain AI Act compliance warranties, a violation triggers breach; (d) reputational risk. This is why AI Act compliance representations are now standard SPA content in any tech deal. But reps without a real compliance programme are hollow — the acquirer needs to verify the substance, not just the representation.",
      mapActive:0,
-     question:"Egy PE fund SaaS céget vásárol amelynek van egy nagy kockázatú AI rendszere amelynek hiányzik a conformity assessment-je. A deal zárásánál mi a helyes megközelítés?",
-     choices:["Elfogadni a hiányt és a zárás utáni remediation-ben megállapodni — a bírság szintű kockázat kezelhető","Feltételes vételárt, escrow-t vagy zárás előtti remediation-t kérni — a conformity assessment hiánya piaci hozzáférési blokkolás, nem csak bírság","A NAIH-hoz fordulni kötelező bejelentési kötelezettség alapján"],
+     question:"A PE fund is acquiring a SaaS company with a high-risk AI system that is missing its conformity assessment. At deal closing, what is the correct approach?",
+     choices:["Accept the gap and agree on post-closing remediation — the fine-level risk is manageable","Require conditional pricing, escrow, or pre-closing remediation — missing conformity assessment is a market access blockage, not just a fine risk","Notify the NAIH of the compliance gap as a mandatory disclosure obligation"],
      correct:1,
-     explanation:"B helyes. A conformity assessment nem csupán megfelelési hiányosság — a rendszer törvényesen nem hozható EU piacra nélküle. Ez működési kockázat: egy hatóság előírhatja a rendszer leállítását. A megfelelő eszközök: escrow remediation elvégzéséig, vételár-kiigazítás, vagy — ha a hiányosság kellően súlyos — zárás előtti feltétel. Nem szabad normális deal kockázatként kezelni.",
-     legal:"Art. 43: conformity assessment kötelező. Art. 49: regisztráció piac előtt. Art. 99: bírság keretrendszer. Art. 71: EU adatbázis kötelezettség. Art. 79: piacfelügyeleti hatóság jogköre rendszer leállítására.",
+     explanation:"B is correct. Missing conformity assessment is not just a compliance gap — the system is technically not lawfully on the EU market without it. A regulator can require the system to be withdrawn. This is an operational risk that escrow pending remediation, price adjustment, or a pre-closing remediation condition should address. Treating it as a manageable fine risk understates the exposure significantly.",
+     legal:"Art. 43: conformity assessment mandatory. Art. 49: registration before market launch. Art. 99: penalty framework. Art. 79: market surveillance authority power to require system withdrawal.",
      payoffs:[
-       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"M&A AI Act DD teljes kép: tiltott scan → nagy kockázatú besorolás → dokumentáció audit → vendor megállapodás felülvizsgálat → FRIA/DPIA állapot → incidens előzmények. Minden réteg különböző kockázati profilt tár fel."},
-       {icon:"📝",labelColor:"#5E2D7A",label:"Szerződéses klauzula",text:"Standard SPA AI Act reps (2026 piaci szokás): (1) minden AI rendszer besorolva és dokumentálva; (2) minden nagy kockázatú rendszer conform. assessed és regisztrált; (3) nincs tiltott rendszer; (4) GPAI vendor megállapodások Art. 25(2) jogokat tartalmaznak; (5) nincs bejelentett vagy bejelentendő súlyos incidens."},
-       {icon:"💡",labelColor:"#3A8800",label:"Proaktív tanács",text:"Az AI Act compliance 2026-ban az a amit a GDPR compliance volt 2018-ban a VC tranzakciókban: hamarosan alapvető diligence elem minden tech dealben. Aki ma felépíti a practice-t, az fogja a következő 3 év mandátumait nyerni."}
+       {icon:"🔍",labelColor:"#854F0B",label:"DD red flag",text:"Full M&A AI Act DD sequence: prohibited scan → high-risk classification → documentation audit → vendor agreement review → FRIA/DPIA status → incident history. Each layer reveals a different risk profile. Run them in this order: Art. 5 violations are disqualifying and should terminate the process early if found without a remediation plan."},
+       {icon:"📝",labelColor:"#5E2D7A",label:"Contract clause",text:"Standard SPA AI Act reps (2026 market practice): (1) all AI systems are classified and the classification is documented in writing; (2) all high-risk systems have completed conformity assessment and are registered in the EU database; (3) no Art. 5 prohibited practices exist in any current product feature; (4) GPAI vendor agreements contain Art. 25(2) rights; (5) no serious incidents have occurred that were reported or should have been reported and were not."},
+       {icon:"💡",labelColor:"#3A8800",label:"Proactive advice",text:"AI Act compliance is in 2026 what GDPR compliance was in 2018 for VC transactions: within two years, it will be a standard diligence item in every tech deal and a standard representation in every SPA. The lawyers who build the practice now — the classification frameworks, the DD checklists, the contract clause libraries — will own the mandate flow for the next five years. The window to be the expert before it becomes commoditised is open right now."}
      ]
     }
   ]}
 ];
-
 
 // ─────────────────────────────────────────────────────
 // SECTION 4 — SRS ENGINE
@@ -1681,7 +1683,7 @@ function renderLearnHome() {
   let html = `
     <div class="section-header">
       <div class="sh-label">AI Act Tanfolyam</div>
-      <div class="sh-title">📚 10 Lessons</div>
+      <div class="sh-title">📚 10 Lecke</div>
       <div class="sh-sub">Deployer-fókuszú · SaaS & M&A · Magyar jogi kontextus</div>
     </div>
     <div class="learn-progress">
@@ -1704,7 +1706,7 @@ function renderLearnHome() {
            onclick="${locked?'':('openLesson('+l.id+')')}">
         <div class="lesson-icon ${iconClass}">${icon}</div>
         <div style="flex:1">
-          <div class="lesson-num">Lesson ${l.id} · ${l.time}</div>
+          <div class="lesson-num">Lecke ${l.id} · ${l.time}</div>
           <div class="lesson-name">${l.title}</div>
         </div>
         <div class="lesson-badge">${badge}</div>
@@ -1777,7 +1779,7 @@ function renderLessonView(lesson, chunkIdx) {
           <div class="story-lbl">⚠️ Mi a tét</div>
           <div class="story-txt">${chunk.consequences}</div>
         </div>
-        ${!done ? `<button class="read-btn" onclick="markRead(${lesson.id},${ci},this)" id="readbtn-${lesson.id}-${ci}">Got it →</button>` : '<button class="read-btn read-done">✓ Read</button>'}
+        ${!done ? `<button class="read-btn" onclick="markRead(${lesson.id},${ci},this)" id="readbtn-${lesson.id}-${ci}">Megértettem →</button>` : '<button class="read-btn read-done">✓ Elolvasva</button>'}
       </div>`;
 
       // Exercise
@@ -1786,7 +1788,7 @@ function renderLessonView(lesson, chunkIdx) {
       chunksHtml += `<div class="ex-wrap" id="ex-${lesson.id}-${ci}">
         <div class="ex-label">📝 Gyakorlat</div>`;
       if(locked_ex) {
-        chunksHtml += '<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0">Read the lesson to unlock the exercise</div>';
+        chunksHtml += '<div style="font-size:12px;color:var(--text3);font-style:italic;padding:6px 0">Olvasd el a leckét a feladat feloldásához</div>';
       } else {
         chunksHtml += `<div class="ex-q">${chunk.question}</div>`;
         chunk.choices.forEach((ch,chi) => {
@@ -1838,10 +1840,10 @@ function renderLessonView(lesson, chunkIdx) {
     const nextLesson = LESSONS.find(l=>l.id===lesson.id+1);
     completeHtml = `<div class="lesson-complete">
       <span class="lc-icon">🎉</span>
-      <div class="lc-title">Lesson complete!</div>
+      <div class="lc-title">Lecke kész!</div>
       <div class="lc-sub">${lesson.title}</div>
-      ${nextLesson?`<button class="lc-btn" onclick="openLesson(${nextLesson.id})">Next lesson →</button>`:''}
-      <button class="lc-home" onclick="renderLearnHome()">← Back to lessons</button>
+      ${nextLesson?`<button class="lc-btn" onclick="openLesson(${nextLesson.id})">Következő lecke →</button>`:''}
+      <button class="lc-home" onclick="renderLearnHome()">← Vissza a listához</button>
     </div>`;
   }
 
@@ -1850,7 +1852,7 @@ function renderLessonView(lesson, chunkIdx) {
       <button class="lv-back" onclick="renderLearnHome()">←</button>
       <div>
         <div class="lv-title">${lesson.title}</div>
-        <div class="lv-meta">Lesson ${lesson.id} · ${lesson.time}</div>
+        <div class="lv-meta">Lecke ${lesson.id} · ${lesson.time}</div>
       </div>
     </div>
     <div class="chunk-prog">${chunkDots}</div>
